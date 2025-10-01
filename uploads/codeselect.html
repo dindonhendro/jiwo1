@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stitch Design</title>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#756657",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#1b1918",
+                        "text-light": "#161413",
+                        "text-dark": "#eeedec",
+                        "text-subtle-light": "#7a736c",
+                        "text-subtle-dark": "#a19991",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-background-light/80 p-4 pb-3 dark:bg-background-dark/80 backdrop-blur-sm">
+<button class="flex h-10 w-10 items-center justify-center rounded-full text-text-light dark:text-text-dark">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold text-text-light dark:text-text-dark">Choose a service</h1>
+<div class="w-10"></div>
+</header>
+<main class="p-4">
+<section class="mb-8">
+<h2 class="px-4 pb-3 pt-2 text-2xl font-bold text-text-light dark:text-text-dark">Psychology</h2>
+<div class="rounded-lg bg-background-light p-4 shadow-sm dark:bg-background-dark">
+<div class="flex flex-col gap-4">
+<div class="aspect-video w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYXsmpNHILxrDp44KNRFCGj-npnErtipxWqbaQxHRspXIZU1rzHm47O68jqv8Cbk5yx9JtCjBAq9W6EYCI9DxsAyTUM-IQVX2MMbfzfrTfbNcD_cRLgai-YEL0unaFOoPEDj3tAly2pg6UCttQLPThSZor3TyU5RhoGipEgPBvegrB18O26toUjtSV4RdTbP_ViykRD4KAuSbPwVvjEFbpK_n5PoU6tR6Wzcqtznhv4-eAft0Cjdzp6bmGd6ZJMeyarVYikb6W_tM");'></div>
+<div class="flex flex-col gap-2">
+<p class="text-sm font-medium text-primary">Psychotherapy</p>
+<p class="text-lg font-bold text-text-light dark:text-text-dark">Talk therapy</p>
+<p class="text-sm text-text-subtle-light dark:text-text-subtle-dark">
+                                    Psychotherapy is a collaborative treatment based on the relationship between an individual and a psychologist. Grounded in dialogue, it provides a supportive environment that allows you to talk openly with someone who's objective, neutral and nonjudgmental.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="px-4 pb-3 pt-2 text-2xl font-bold text-text-light dark:text-text-dark">Life Coaching</h2>
+<div class="rounded-lg bg-background-light p-4 shadow-sm dark:bg-background-dark">
+<div class="flex flex-col gap-4">
+<div class="aspect-video w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBTHjuD-KOAbOrd0yVDk3bo9tQl_izk1eBhjCkzJ4QWEC8KaY9eWDM6QaEWe-D9jkdyqCTCBX5PZsrNY0_EGlWtMUBruyyjUtbuamGTrDE8Yxr_in9X0NQ9ryi_4PLR1pfe-b4dOYs2V-PKb50dMZYFp2xezf8hyrqEialeAgH_cGy8c9dcGjnYcoOd14wr7Z3wlpceOAZoSsREvnDFinA2qlEclkxqYPfpLEUmc_cq44dymN29v0OHXAx7HssVxdlEHYf4OHRJbNo");'></div>
+<div class="flex flex-col gap-2">
+<p class="text-sm font-medium text-primary">Life Coaching</p>
+<p class="text-lg font-bold text-text-light dark:text-text-dark">Personal development</p>
+<p class="text-sm text-text-subtle-light dark:text-text-subtle-dark">
+                                    Life coaching is a type of support that helps you achieve your personal goals. It can help you identify your strengths and weaknesses, and develop strategies to overcome challenges.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="px-4 pb-3 pt-2 text-2xl font-bold text-text-light dark:text-text-dark">Yoga</h2>
+<div class="rounded-lg bg-background-light p-4 shadow-sm dark:bg-background-dark">
+<div class="flex flex-col gap-4">
+<div class="aspect-video w-full rounded-lg bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBGhcsbwKu5rOmh4YpuEVrng8pq33A9KxgwMptMGmYkitMFt4RocvUiF4zX1jHqYqLJ8257Szsj5GfIZW9uD4SueWXctArG7u47nCm0v1GcTqE8oWS0-Waf2MSuCGK3tLTSi4exmdwHGriNRiwpfNPdQv92aX9U4U5mc6pANM4sOu4FfdzDVLZ8tVXCeecRdFMDR7G10CyP4gkHYOaTxYKkKMGUSIDEuWnHyjGmHr-lUXkB6PpiCF1Sda4SQRzRkPrj8kpdTP-o-_A");'></div>
+<div class="flex flex-col gap-2">
+<p class="text-sm font-medium text-primary">Yoga</p>
+<p class="text-lg font-bold text-text-light dark:text-text-dark">Mindfulness and movement</p>
+<p class="text-sm text-text-subtle-light dark:text-text-subtle-dark">
+                                    Yoga is a mind and body practice that involves physical postures, breathing techniques, and meditation or relaxation. Yoga can help reduce stress, lower blood pressure and heart rate, and improve breathing.
+                                </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<nav class="sticky bottom-0 border-t border-primary/20 bg-background-light/80 pt-2 dark:border-primary/30 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex justify-around px-4 pb-5">
+<a class="flex flex-col items-center gap-1 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-xs font-medium">Consultations</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">favorite</span>
+<span class="text-xs font-bold">Therapies</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium">Profile</span>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

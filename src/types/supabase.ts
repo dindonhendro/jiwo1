@@ -172,6 +172,7 @@ export type Database = {
       screenings: {
         Row: {
           answers: Json
+          condition: string | null
           created_at: string | null
           id: string
           score: number
@@ -182,6 +183,7 @@ export type Database = {
         }
         Insert: {
           answers: Json
+          condition?: string | null
           created_at?: string | null
           id?: string
           score: number
@@ -192,6 +194,7 @@ export type Database = {
         }
         Update: {
           answers?: Json
+          condition?: string | null
           created_at?: string | null
           id?: string
           score?: number

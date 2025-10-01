@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Processing</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#756657",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#1b1918",
+                        "foreground-light": "#1b1918",
+                        "foreground-dark": "#f7f7f7",
+                        "subtle-light": "#dcdad8",
+                        "subtle-dark": "#302d2a",
+                        "placeholder-light": "#9c958e",
+                        "placeholder-dark": "#6c665f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        };
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col h-screen justify-between">
+<div class="flex-grow">
+<header class="flex items-center p-4">
+<button class="text-foreground-light dark:text-foreground-dark">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold text-foreground-light dark:text-foreground-dark flex-1 text-center pr-6">Payment</h1>
+</header>
+<main class="p-4">
+<h2 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark mb-6">Payment method</h2>
+<div class="space-y-4">
+<input class="w-full bg-background-light dark:bg-background-dark border border-subtle-light dark:border-subtle-dark rounded-lg p-4 text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark focus:ring-primary focus:border-primary" placeholder="Card number" type="text"/>
+<input class="w-full bg-background-light dark:bg-background-dark border border-subtle-light dark:border-subtle-dark rounded-lg p-4 text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark focus:ring-primary focus:border-primary" placeholder="Expiry date (MM/YY)" type="text"/>
+<input class="w-full bg-background-light dark:bg-background-dark border border-subtle-light dark:border-subtle-dark rounded-lg p-4 text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark focus:ring-primary focus:border-primary" placeholder="CVV" type="text"/>
+<input class="w-full bg-background-light dark:bg-background-dark border border-subtle-light dark:border-subtle-dark rounded-lg p-4 text-foreground-light dark:text-foreground-dark placeholder-placeholder-light dark:placeholder-placeholder-dark focus:ring-primary focus:border-primary" placeholder="Name on card" type="text"/>
+</div>
+<button class="mt-8 flex items-center justify-between w-full text-left bg-background-light dark:bg-background-dark p-4 rounded-lg border border-subtle-light dark:border-subtle-dark">
+<span class="text-foreground-light dark:text-foreground-dark font-medium">Use a digital wallet</span>
+<span class="material-symbols-outlined text-foreground-light dark:text-foreground-dark">arrow_forward_ios</span>
+</button>
+</main>
+</div>
+<div class="p-4 border-t border-subtle-light dark:border-subtle-dark">
+<button class="w-full bg-primary text-white font-bold py-4 px-5 rounded-lg">Pay now</button>
+</div>
+<nav class="flex justify-around p-2 border-t border-subtle-light dark:border-subtle-dark">
+<a class="flex flex-col items-center gap-1 text-placeholder-light dark:text-placeholder-dark" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-xs font-medium">Consultations</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-placeholder-light dark:text-placeholder-dark" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-xs font-medium">Therapies</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-placeholder-light dark:text-placeholder-dark" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium">Profile</span>
+</a>
+</nav>
+</div>
+
+</body></html>

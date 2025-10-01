@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#756657",
+              "background-light": "#f7f7f7",
+              "background-dark": "#1b1918",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-primary/20 bg-background-light/80 p-4 pb-3 backdrop-blur-sm dark:border-primary/30 dark:bg-background-dark/80">
+<button class="text-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold text-primary dark:text-white">Dr. Amelia Harper</h1>
+<div class="w-8"></div>
+</header>
+<main class="p-4">
+<section class="flex flex-col items-center gap-4 text-center">
+<div class="relative">
+<img alt="Dr. Amelia Harper" class="h-32 w-32 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYhOL3luJEOYg_fbX_kTvBFVM_cSNgTDxlaC92SilyTuz7sKOfRQUArOuPsK0dre11t0i3V9YS4DN3G9FVhpgP_rlC0MyJFMzxmxTPdakmrKfmQ5USNr_zRV6srG3CCxGH-SHQHwgGxw267ldC2AiUhvodRzPKaBPvYPrVjmLn8f7IBLupyMNI_VZu-RvQyJAboK6fPgeVDwWz-NUoYR83bmUHfyCPCEu11fVcCcCyjUM434mHa8UAz9Z7GpuQmqqazwudQROyM1M"/>
+<div class="absolute -bottom-1 right-1 flex items-center justify-center rounded-full bg-primary p-1.5 text-white">
+<span class="material-symbols-outlined text-base">verified</span>
+</div>
+</div>
+<div>
+<h2 class="text-2xl font-bold text-primary dark:text-white">Dr. Amelia Harper</h2>
+<p class="text-base text-primary/80 dark:text-white/60">Psychologist</p>
+<div class="mt-1 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-lg text-primary">star</span>
+<p class="text-base font-medium text-primary dark:text-white/80">4.8 <span class="font-normal text-primary/80 dark:text-white/60">(120 reviews)</span></p>
+</div>
+</div>
+</section>
+<section class="mt-8">
+<h3 class="text-xl font-bold text-primary dark:text-white">About</h3>
+<p class="mt-2 text-base text-primary/80 dark:text-white/60">
+              Dr. Harper is a licensed psychologist with over 10 years of experience in treating anxiety, depression, and relationship issues. She uses a holistic approach, integrating cognitive-behavioral therapy with mindfulness techniques.
+            </p>
+</section>
+<section class="mt-6">
+<h3 class="text-xl font-bold text-primary dark:text-white">Specialties</h3>
+<div class="mt-2 flex flex-wrap gap-2">
+<span class="rounded-lg bg-primary/20 px-3 py-1 text-sm font-medium text-primary dark:bg-primary/30 dark:text-white/80">Anxiety</span>
+<span class="rounded-lg bg-primary/20 px-3 py-1 text-sm font-medium text-primary dark:bg-primary/30 dark:text-white/80">Depression</span>
+<span class="rounded-lg bg-primary/20 px-3 py-1 text-sm font-medium text-primary dark:bg-primary/30 dark:text-white/80">Relationship Issues</span>
+</div>
+</section>
+<section class="mt-8">
+<h3 class="text-xl font-bold text-primary dark:text-white">Reviews</h3>
+<div class="mt-4 flex flex-col gap-6 md:flex-row md:items-start">
+<div class="flex flex-col items-center gap-1 md:items-start">
+<p class="text-5xl font-bold text-primary dark:text-white">4.8</p>
+<div class="flex text-primary">
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star</span>
+<span class="material-symbols-outlined">star_half</span>
+</div>
+<p class="text-sm text-primary/80 dark:text-white/60">Based on 120 reviews</p>
+</div>
+<div class="w-full flex-1">
+<div class="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-1">
+<span class="text-sm text-primary/80 dark:text-white/60">5</span>
+<div class="h-1.5 rounded-full bg-primary/20 dark:bg-primary/30">
+<div class="h-full rounded-full bg-primary" style="width: 70%;"></div>
+</div>
+<span class="text-sm text-primary/80 dark:text-white/60">70%</span>
+<span class="text-sm text-primary/80 dark:text-white/60">4</span>
+<div class="h-1.5 rounded-full bg-primary/20 dark:bg-primary/30">
+<div class="h-full rounded-full bg-primary" style="width: 20%;"></div>
+</div>
+<span class="text-sm text-primary/80 dark:text-white/60">20%</span>
+<span class="text-sm text-primary/80 dark:text-white/60">3</span>
+<div class="h-1.5 rounded-full bg-primary/20 dark:bg-primary/30">
+<div class="h-full rounded-full bg-primary" style="width: 5%;"></div>
+</div>
+<span class="text-sm text-primary/80 dark:text-white/60">5%</span>
+<span class="text-sm text-primary/80 dark:text-white/60">2</span>
+<div class="h-1.5 rounded-full bg-primary/20 dark:bg-primary/30">
+<div class="h-full rounded-full bg-primary" style="width: 3%;"></div>
+</div>
+<span class="text-sm text-primary/80 dark:text-white/60">3%</span>
+<span class="text-sm text-primary/80 dark:text-white/60">1</span>
+<div class="h-1.5 rounded-full bg-primary/20 dark:bg-primary/30">
+<div class="h-full rounded-full bg-primary" style="width: 2%;"></div>
+</div>
+<span class="text-sm text-primary/80 dark:text-white/60">2%</span>
+</div>
+</div>
+</div>
+<div class="mt-6 space-y-6">
+<div class="flex flex-col gap-3 rounded-lg bg-background-light p-4 shadow-sm dark:bg-background-dark dark:ring-1 dark:ring-primary/20">
+<div class="flex items-center gap-3">
+<img alt="Sophia Bennett" class="h-10 w-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4LcgqruHhlA00aWOCmYWtiDIXi2NcfbnvZasIG0ZpnpoEZuKiXeWgNwkjWErxNdaKTO1QvUcNv8s9NJcb53D1KDLDitNMIrHJrIky7ieJ5OCVAwE9pbhYluT77iVDWHiugOI8zD05knZxmGIQ4vVsx62u6O0Gl74bnetgFAeugTU7J89IVM0GbaJD8SgnrbiPwLIjIKelIm5J_MpC8klqKhLU-ymnacfcNESYljtMzmOxkD38IHpQWv-wn5_I9lfOtQdwH8IWHuU"/>
+<div class="flex-1">
+<p class="font-medium text-primary dark:text-white">Sophia Bennett</p>
+<p class="text-sm text-primary/80 dark:text-white/60">2 months ago</p>
+</div>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+</div>
+<p class="text-base text-primary/80 dark:text-white/60">Dr. Harper is incredibly empathetic and insightful. Her guidance has been instrumental in my journey to overcome anxiety. I highly recommend her!</p>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-background-light p-4 shadow-sm dark:bg-background-dark dark:ring-1 dark:ring-primary/20">
+<div class="flex items-center gap-3">
+<img alt="Ethan Carter" class="h-10 w-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhF-nbHNevPS5NgHyuxSrUzO6maDqfzGxekEYk2UrWBqIIm9CiEcHsNWkxbfBXdD8Q8SjyTwv7H4McwS9HVH28uW3hlmshFHwFFuXamI4GUwYgvP-ZpMbS-ZSUguP98hhJiefvejFIBhhu3_Sr3KEziyLc0vXTxq9dIQvKjdZYRDNucDcn-XPmEj5k1ZUPrNiM_lS4WrKFiRr7jBSqnQsmT2v6ZRkniQMQAy6yM9ixvc7AZvhJhZs5PuA2fyL0bZFAYep0RVlwYk4"/>
+<div class="flex-1">
+<p class="font-medium text-primary dark:text-white">Ethan Carter</p>
+<p class="text-sm text-primary/80 dark:text-white/60">3 months ago</p>
+</div>
+</div>
+<div class="flex text-primary">
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base">star</span>
+<span class="material-symbols-outlined text-base text-primary/50 dark:text-white/40">star</span>
+</div>
+<p class="text-base text-primary/80 dark:text-white/60">Dr. Harper provided a safe and supportive environment for me to explore my feelings. While I found her approach helpful, I felt it could have been more structured.</p>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark">
+<div class="px-4 py-3">
+<button class="w-full rounded-lg bg-primary py-3 text-base font-bold text-white shadow-lg transition-transform active:scale-95">Book Consultation</button>
+</div>
+<nav class="flex justify-around border-t border-primary/20 pt-2 pb-3 dark:border-primary/30">
+<a class="flex flex-col items-center gap-1 text-primary/80 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary/80 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-xs">Consultations</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary/80 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-xs">Therapies</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary dark:text-white" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-bold">Profile</span>
+</a>
+</nav>
+</footer>
+</div>
+
+</body></html>

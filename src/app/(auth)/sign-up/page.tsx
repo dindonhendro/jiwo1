@@ -23,16 +23,16 @@ export default async function Signup(props: {
   return (
     <>
       <Navbar />
-      <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4 py-8">
-        <div className="w-full max-w-md rounded-lg border border-border bg-card p-6 shadow-sm">
+      <div className="flex min-h-screen flex-col items-center justify-center bg-[#f7f7f7] dark:bg-[#1b1918] px-4 py-8">
+        <div className="w-full max-w-md rounded-lg border border-[#756657]/20 bg-white dark:bg-[#302d2a] p-6 shadow-sm">
           <UrlProvider>
             <form className="flex flex-col space-y-6">
               <div className="space-y-2 text-center">
-                <h1 className="text-3xl font-semibold tracking-tight">Daftar</h1>
-                <p className="text-sm text-muted-foreground">
+                <h1 className="text-3xl font-semibold tracking-tight text-[#161413] dark:text-[#eeedec]">Daftar</h1>
+                <p className="text-sm text-[#7a736c] dark:text-[#a19991]">
                   Sudah punya akun?{" "}
                   <Link
-                    className="text-primary font-medium hover:underline transition-all"
+                    className="text-[#756657] font-medium hover:underline transition-all"
                     href="/sign-in"
                   >
                     Masuk
@@ -42,7 +42,7 @@ export default async function Signup(props: {
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="full_name" className="text-sm font-medium">
+                  <Label htmlFor="full_name" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
                     Nama Lengkap
                   </Label>
                   <Input
@@ -51,12 +51,47 @@ export default async function Signup(props: {
                     type="text"
                     placeholder="John Doe"
                     required
-                    className="w-full"
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
                   />
                 </div>
 
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="gender" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
+                      Jenis Kelamin
+                    </Label>
+                    <select
+                      id="gender"
+                      name="gender"
+                      required
+                      className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border border-[#756657]/20 text-[#161413] dark:text-[#eeedec] rounded-md px-3 py-2 focus:ring-[#756657] focus:border-[#756657]"
+                    >
+                      <option value="">Pilih</option>
+                      <option value="male">Laki-laki</option>
+                      <option value="female">Perempuan</option>
+                      <option value="other">Lainnya</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="age" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
+                      Usia
+                    </Label>
+                    <Input
+                      id="age"
+                      name="age"
+                      type="number"
+                      min="13"
+                      max="120"
+                      placeholder="25"
+                      required
+                      className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
+                    />
+                  </div>
+                </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">
+                  <Label htmlFor="email" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
                     Email
                   </Label>
                   <Input
@@ -65,12 +100,12 @@ export default async function Signup(props: {
                     type="email"
                     placeholder="anda@contoh.com"
                     required
-                    className="w-full"
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-sm font-medium">
+                  <Label htmlFor="password" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
                     Kata Sandi
                   </Label>
                   <Input
@@ -80,7 +115,7 @@ export default async function Signup(props: {
                     placeholder="Kata sandi Anda"
                     minLength={6}
                     required
-                    className="w-full"
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
                   />
                 </div>
               </div>
@@ -88,7 +123,7 @@ export default async function Signup(props: {
               <SubmitButton
                 formAction={signUpAction}
                 pendingText="Sedang mendaftar..."
-                className="w-full"
+                className="w-full bg-[#756657] hover:bg-[#756657]/90 text-white"
               >
                 Daftar
               </SubmitButton>

@@ -17,35 +17,35 @@ export default function DashboardNavbar() {
   const router = useRouter()
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white py-4">
+    <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <Link href="/" prefetch className="text-xl font-bold text-blue-600 flex items-center">
+          <Link href="/" prefetch className="text-xl font-bold text-[#756657] flex items-center">
             <Heart className="w-6 h-6 mr-2" />
-            MindCare
+            Jiwo.AI
           </Link>
           <div className="hidden md:flex items-center gap-4 ml-8">
-            <Link href="/dashboard" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/dashboard" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Home className="w-4 h-4" />
               Dashboard
             </Link>
-            <Link href="/screening" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/screening" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Brain className="w-4 h-4" />
               Screening
             </Link>
-            <Link href="/journal" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/journal" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <BookOpen className="w-4 h-4" />
               Journal
             </Link>
-            <Link href="/progress" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/progress" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <TrendingUp className="w-4 h-4" />
               Progress
             </Link>
-            <Link href="/chat" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <MessageCircle className="w-4 h-4" />
               Chat
             </Link>
-            <Link href="/treatment" className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+            <Link href="/treatment" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Heart className="w-4 h-4" />
               Treatment
             </Link>
@@ -54,15 +54,18 @@ export default function DashboardNavbar() {
         <div className="flex gap-4 items-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="text-[#756657] hover:bg-[#756657]/10">
                 <UserCircle className="h-6 w-6" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={async () => {
-                await supabase.auth.signOut()
-                router.refresh()
-              }}>
+            <DropdownMenuContent align="end" className="bg-white dark:bg-[#302d2a] border-[#756657]/20">
+              <DropdownMenuItem 
+                onClick={async () => {
+                  await supabase.auth.signOut()
+                  router.refresh()
+                }}
+                className="text-[#161413] dark:text-[#eeedec] hover:bg-[#756657]/10"
+              >
                 Sign out
               </DropdownMenuItem>
             </DropdownMenuContent>

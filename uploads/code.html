@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Confirmation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#756657",
+                        "background-light": "#f7f7f7",
+                        "background-dark": "#1b1918",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col min-h-screen">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4">
+<div class="flex items-center">
+<button class="text-neutral-800 dark:text-neutral-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 flex-1 text-center pr-6">Booking Confirmed</h1>
+</div>
+</header>
+<main class="flex-grow p-4 space-y-8">
+<div class="text-center">
+<div class="inline-flex items-center justify-center size-16 bg-primary/20 rounded-full mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">check</span>
+</div>
+<h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">You're all set!</h2>
+<p class="text-neutral-600 dark:text-neutral-400 mt-2">Your appointment is confirmed. You'll receive a reminder 24 hours before your session.</p>
+</div>
+<div class="bg-primary/10 dark:bg-primary/20 rounded-xl p-4 space-y-4">
+<h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Appointment Details</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Service</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">Therapy Session</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Professional</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">Dr. Anya Sharma</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Date</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">Tuesday, July 23, 2024</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Time</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">10:00 AM - 11:00 AM</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 dark:bg-primary/20 rounded-xl p-4 space-y-4">
+<h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100">Payment Summary</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Amount</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">$120.00</span>
+</div>
+<div class="flex justify-between items-start">
+<span class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Card</span>
+<span class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 text-right">Visa **** 1234</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 pt-4">
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-primary text-white font-bold rounded-lg text-base">
+<span class="material-symbols-outlined">calendar_add_on</span>
+<span>Add to Calendar</span>
+</button>
+<button class="w-full h-12 flex items-center justify-center gap-2 bg-primary/20 dark:bg-primary/30 text-primary font-bold rounded-lg text-base">
+<span>View Upcoming Bookings</span>
+</button>
+</div>
+</main>
+<footer class="sticky bottom-0 bg-background-light dark:bg-background-dark border-t border-primary/20 dark:border-primary/30">
+<nav class="flex justify-around p-2">
+<a class="flex flex-col items-center gap-1 text-primary w-1/4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">home</span>
+<span class="text-xs font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-neutral-500 dark:text-neutral-400 w-1/4" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-xs font-medium">Bookings</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-neutral-500 dark:text-neutral-400 w-1/4" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-xs font-medium">Therapies</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-neutral-500 dark:text-neutral-400 w-1/4" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs font-medium">Profile</span>
+</a>
+</nav>
+</footer>
+</div>
+
+</body></html>

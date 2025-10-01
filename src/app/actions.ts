@@ -9,6 +9,8 @@ export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const fullName = formData.get("full_name")?.toString() || '';
+  const gender = formData.get("gender")?.toString() || '';
+  const age = formData.get("age")?.toString() || '';
   const supabase = await createClient();
   const origin = headers().get("origin");
 
@@ -20,6 +22,14 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
+  if (!gender || !age) {
+    return encodedRedirect(
+      "error",
+      "/sign-up",
+      "Gender and age are required for mental health analysis",
+    );
+  }
+
   const { data: { user }, error } = await supabase.auth.signUp({
     email,
     password,
@@ -28,12 +38,13 @@ export const signUpAction = async (formData: FormData) => {
       data: {
         full_name: fullName,
         email: email,
+        gender: gender,
+        age: parseInt(age)
       }
     },
   });
 
   console.log("After signUp", error);
-
 
   if (error) {
     console.error(error.code + " " + error.message);
@@ -49,6 +60,8 @@ export const signUpAction = async (formData: FormData) => {
           name: fullName,
           full_name: fullName,
           email: email,
+          gender: gender,
+          age: parseInt(age),
           user_id: user.id,
           token_identifier: user.id,
           created_at: new Date().toISOString()

@@ -12,12 +12,12 @@ export default async function Navbar() {
   } = await (await supabase).auth.getUser();
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white py-2">
+    <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link
           href="/"
           prefetch
-          className="text-xl font-bold text-blue-600 flex items-center"
+          className="text-xl font-bold text-[#756657] flex items-center"
         >
           <Heart className="w-6 h-6 mr-2" />
           Jiwo.AI
@@ -27,9 +27,9 @@ export default async function Navbar() {
             <>
               <Link
                 href="/dashboard"
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                className="px-4 py-2 text-sm font-medium text-[#161413] dark:text-[#eeedec] hover:text-[#756657] transition-colors"
               >
-                <Button>Dashboard</Button>
+                <Button className="bg-[#756657] hover:bg-[#756657]/90 text-white">Dashboard</Button>
               </Link>
               <UserProfile />
             </>
@@ -37,13 +37,13 @@ export default async function Navbar() {
             <>
               <Link
                 href="/sign-in"
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+                className="px-4 py-2 text-sm font-medium text-[#161413] dark:text-[#eeedec] hover:text-[#756657] transition-colors"
               >
                 Masuk
               </Link>
               <Link
                 href="/sign-up"
-                className="px-4 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800"
+                className="px-4 py-2 text-sm font-medium text-white bg-[#756657] rounded-md hover:bg-[#756657]/90 transition-colors"
               >
                 Daftar
               </Link>

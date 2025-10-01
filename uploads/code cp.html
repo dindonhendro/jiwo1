@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#756657",
+            "background-light": "#f7f7f7",
+            "background-dark": "#1b1918",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-black dark:text-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center p-4">
+<button class="text-black dark:text-white">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold pr-8">Therapists</h1>
+</div>
+<div class="px-4 pb-4">
+<div class="relative">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-black/50 dark:text-white/50">search</span>
+</div>
+<input class="w-full rounded-lg border-none bg-primary/20 dark:bg-primary/30 py-3 pl-10 pr-4 placeholder:text-black/50 dark:placeholder:text-white/50 focus:ring-2 focus:ring-primary" placeholder="Search for a therapist" type="text"/>
+</div>
+</div>
+<div class="flex gap-2 px-4 pb-4 overflow-x-auto">
+<button class="shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white">Psychologist</button>
+<button class="shrink-0 rounded-full bg-primary/20 dark:bg-primary/30 px-4 py-2 text-sm font-medium text-black dark:text-white">Life Coach</button>
+<button class="shrink-0 rounded-full bg-primary/20 dark:bg-primary/30 px-4 py-2 text-sm font-medium text-black dark:text-white">Yoga Instructor</button>
+</div>
+</header>
+<main class="flex flex-col">
+<div class="flex cursor-pointer items-center gap-4 px-4 py-3 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors duration-200">
+<img alt="Dr. Amelia Harper" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmkBvzRPqr18nPeJfdPebAsMhN7ocyk9oJ4WNj9Gb_DPeOLwXILFAvlSzczBlGRXshwPUVc2dEp6tRPpUI-rz21vc2V6W6gjR7afkDU5sZB9xdFhKAr8jGyXFG14vSJgW5gsXerBlvI3eK_CtH4MwISu8bLWfPMsJuwDjpTvMyjfxdUhmAF_3b0R4vcnkwWD3inrirRR380MX6Z-naGo8v6qa_n2xE_yR8gF8f1zf07M95icF9kUbjPw1AQ66g0f4P43xbXlH3TQM"/>
+<div class="flex-1">
+<p class="font-bold">Dr. Amelia Harper</p>
+<div class="flex items-center text-sm text-black/60 dark:text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">star</span>
+<p class="ml-1">4.9 (120 reviews)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-black/40 dark:text-white/40">chevron_right</span>
+</div>
+<div class="flex cursor-pointer items-center gap-4 px-4 py-3 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors duration-200">
+<img alt="Dr. Ethan Carter" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARzQjSUJNCxherZjbeuKe89G14U_PeZj0cpp3a0j7-iodNwMpr3AMqvU0bYv0ZP-dFeKmhXyp6MxTQq7Umdx4-OS_-3FpHKXVZ3TcfHgnTH-I0Mu9RFgWt3ISe4T-vj2YyxS1RsNM15UL23cz3Ly_TRu0oUaoySSBQh0iYlT_NQfaofmDweO1IBEacGxucwQonsatiul_vxvCNrhy5-bOmyerECiWTNO_M2V7wqueGHnPhL2jWQeLsuLwEIwXaKFFcsN4pWDyjhaA"/>
+<div class="flex-1">
+<p class="font-bold">Dr. Ethan Carter</p>
+<div class="flex items-center text-sm text-black/60 dark:text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">star</span>
+<p class="ml-1">4.8 (95 reviews)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-black/40 dark:text-white/40">chevron_right</span>
+</div>
+<div class="flex cursor-pointer items-center gap-4 px-4 py-3 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors duration-200">
+<img alt="Dr. Olivia Bennett" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcU5IiNgxKc-L_qfLUu2jgn7zKkX0kJwJHLyHZKFAWQAoV3vshTAL1b1SAly4jpW2ortUhniCGIoTsCKs0KI75QT3oUIo9CVUzaIGaQxq5mbaU37ubCa4BnVHVgQBq-Sb18Us4jDR7yunEF_rREBrVMqhj8o4vCXyu7MpI-nQ9ViYlYdFug4TOd3KMt1OGHDC3JzQXTtUotbRNLRp_rNbUENaEKKTc1l-Z9LpDzT-7KmZOr9mVyuYmX87dUoz12WosU0JhHdqLWyA"/>
+<div class="flex-1">
+<p class="font-bold">Dr. Olivia Bennett</p>
+<div class="flex items-center text-sm text-black/60 dark:text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">star</span>
+<p class="ml-1">4.7 (110 reviews)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-black/40 dark:text-white/40">chevron_right</span>
+</div>
+<div class="flex cursor-pointer items-center gap-4 px-4 py-3 hover:bg-primary/10 dark:hover:bg-primary/20 transition-colors duration-200">
+<img alt="Dr. Noah Parker" class="h-14 w-14 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBicyzJ_BxqBrcW34T8sc2IZs6SBjww2GhHEFY9WinCyaurTOOoqDiN62aYsVo3J_0orEWh8GKJz5BMFPG-83sAKdQFovYbpiBj7mtf4_6q9RVjgGpxo0b7cnFfND5rx35qWW6FG7tcL2pIxJymFusGa3qXbJVsLgsuwrqzEuv-3VKx1Mgy-e9IaPIZ8LSdCXhxmMICxH0nx1uxGPqqgCABcOWcKdiO-82biEPGLiNH4gBuVXr7BcghUtjfRoJCZtcjAemyxlVb0s"/>
+<div class="flex-1">
+<p class="font-bold">Dr. Noah Parker</p>
+<div class="flex items-center text-sm text-black/60 dark:text-white/60">
+<span class="material-symbols-outlined text-sm text-primary">star</span>
+<p class="ml-1">4.6 (85 reviews)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-black/40 dark:text-white/40">chevron_right</span>
+</div>
+</main>
+</div>
+<footer class="sticky bottom-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-t border-primary/20 dark:border-primary/30">
+<nav class="flex justify-around py-2">
+<a class="flex flex-col items-center gap-1 text-black/60 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-xs">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-black/60 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-xs">Consultations</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-xs font-bold">Therapies</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-black/60 dark:text-white/60" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-xs">Profile</span>
+</a>
+</nav>
+<div class="pb-safe-area-inset-bottom h-5 bg-transparent"></div>
+</footer>
+</div>
+
+</body></html>

@@ -5,28 +5,28 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-[#161413] dark:bg-[#0a0908] text-[#eeedec]">
       <div className="container mx-auto px-4 py-12">
         {/* Crisis Support Banner */}
-        <div className="bg-red-600 rounded-lg p-6 mb-12 text-center">
-          <h3 className="text-xl font-bold mb-2">
+        <div className="bg-[#756657] rounded-lg p-6 mb-12 text-center">
+          <h3 className="text-xl font-bold mb-2 text-white">
             Crisis Support Available 24/7
           </h3>
-          <p className="mb-4">
+          <p className="mb-4 text-white/90">
             If you're experiencing a mental health crisis, help is available
             immediately.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="tel:988"
-              className="inline-flex items-center px-6 py-3 bg-white text-red-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-white text-[#756657] rounded-lg hover:bg-[#f7f7f7] transition-colors font-semibold"
             >
               <Phone className="w-4 h-4 mr-2" />
               Call 988 (Suicide & Crisis Lifeline)
             </a>
             <a
               href="sms:741741"
-              className="inline-flex items-center px-6 py-3 bg-red-700 text-white rounded-lg hover:bg-red-800 transition-colors font-semibold"
+              className="inline-flex items-center px-6 py-3 bg-[#756657]/80 text-white rounded-lg hover:bg-[#756657]/90 transition-colors font-semibold"
             >
               <Mail className="w-4 h-4 mr-2" />
               Text HOME to 741741
@@ -37,44 +37,44 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Platform Column */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Platform</h3>
+            <h3 className="font-semibold text-[#eeedec] mb-4">Platform</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/dashboard"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Dashboard
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  href="/screening"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Mental Health Screening
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  href="/journal"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Journaling
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  href="/chat"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Professional Chat
                 </Link>
               </li>
               <li>
                 <Link
-                  href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  href="/progress"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Progress Tracking
                 </Link>
@@ -84,12 +84,12 @@ export default function Footer() {
 
           {/* Support Column */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Support</h3>
+            <h3 className="font-semibold text-[#eeedec] mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Help Center
                 </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Crisis Resources
                 </Link>
@@ -105,7 +105,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Community Guidelines
                 </Link>
@@ -113,7 +113,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Contact Support
                 </Link>
@@ -121,7 +121,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Professional Resources
                 </Link>
@@ -131,12 +131,12 @@ export default function Footer() {
 
           {/* Company Column */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Company</h3>
+            <h3 className="font-semibold text-[#eeedec] mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   About Us
                 </Link>
@@ -144,7 +144,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Our Mission
                 </Link>
@@ -152,7 +152,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Research & Evidence
                 </Link>
@@ -160,7 +160,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Careers
                 </Link>
@@ -168,7 +168,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Press
                 </Link>
@@ -178,12 +178,12 @@ export default function Footer() {
 
           {/* Legal Column */}
           <div>
-            <h3 className="font-semibold text-white mb-4">Legal & Privacy</h3>
+            <h3 className="font-semibold text-[#eeedec] mb-4">Legal & Privacy</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -191,7 +191,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Terms of Service
                 </Link>
@@ -199,7 +199,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   HIPAA Compliance
                 </Link>
@@ -207,7 +207,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Data Security
                 </Link>
@@ -215,7 +215,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="#"
-                  className="text-gray-300 hover:text-blue-400 transition-colors"
+                  className="text-[#a19991] hover:text-[#756657] transition-colors"
                 >
                   Cookie Policy
                 </Link>
@@ -224,32 +224,32 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-[#756657]/20">
           <div className="flex items-center mb-4 md:mb-0">
-            <Heart className="w-5 h-5 text-red-500 mr-2" />
-            <span className="text-gray-300">
-              © {currentYear} MindCare. Made with care for mental health.
+            <Heart className="w-5 h-5 text-[#756657] mr-2" />
+            <span className="text-[#a19991]">
+              © {currentYear} Jiwo.AI. Made with care for mental health.
             </span>
           </div>
 
           <div className="flex space-x-6">
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+              className="text-[#a19991] hover:text-[#756657] transition-colors"
             >
               <span className="sr-only">Twitter</span>
               <Twitter className="h-6 w-6" />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+              className="text-[#a19991] hover:text-[#756657] transition-colors"
             >
               <span className="sr-only">LinkedIn</span>
               <Linkedin className="h-6 w-6" />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-400 transition-colors"
+              className="text-[#a19991] hover:text-[#756657] transition-colors"
             >
               <span className="sr-only">GitHub</span>
               <Github className="h-6 w-6" />
@@ -258,8 +258,8 @@ export default function Footer() {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-          <p className="text-gray-400 text-sm max-w-4xl mx-auto">
+        <div className="mt-8 pt-8 border-t border-[#756657]/20 text-center">
+          <p className="text-[#a19991] text-sm max-w-4xl mx-auto">
             <strong>Important:</strong> This platform is not a substitute for
             professional medical advice, diagnosis, or treatment. If you are
             experiencing a mental health emergency, please contact emergency

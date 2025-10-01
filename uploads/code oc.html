@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Online Consultation</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#756657",
+            "background-light": "#f7f7f7",
+            "background-dark": "#1b1918",
+          },
+          fontFamily: {
+            "display": ["Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex flex-col h-screen">
+<header class="flex-shrink-0 p-4">
+<div class="flex justify-between items-center">
+<div class="w-8"></div> 
+<span class="text-sm text-primary/80 dark:text-primary/70">15:32</span>
+<button class="text-primary/80 dark:text-primary/70">
+<span class="material-symbols-outlined">
+            fullscreen
+          </span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center p-4 space-y-8">
+<div class="relative w-full aspect-[3/4] max-w-sm rounded-xl overflow-hidden shadow-lg">
+<img alt="Dr. Amelia Harper" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKArxgaaJOnhvBAoCHQYHNTPYB9pf2z3HlemIrHnio1Eop2EsQ2ppvqyBUX-UU5lgJRhOzpv8Itl824Avhsn-a59rwxlK2EGCCfXJtAahekDPbRHAeHyN2ZKUL6YYIK0pZm-pq9G_srPGV8S2kQ263SdVGor_z21L-LaYvBv4RczO7z-5pNYs6IQX4y-YMDLpXM-9RXGpAi6MY-0KN1_1fLcnY_VbSvZ21tbp_ipMe0U9pq2D6tbZcPFGAlxKM_b9AZnVcPuzLIec"/>
+<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+<h1 class="text-xl font-bold text-white">Dr. Amelia Harper</h1>
+<p class="text-sm text-white/80">Psychologist</p>
+</div>
+</div>
+</main>
+<footer class="flex-shrink-0 p-4 space-y-4">
+<div class="flex justify-center items-center space-x-4">
+<button class="p-4 rounded-full bg-primary/20 dark:bg-primary/30 text-primary dark:text-white">
+<span class="material-symbols-outlined">mic_off</span>
+</button>
+<button class="p-4 rounded-full bg-primary/20 dark:bg-primary/30 text-primary dark:text-white">
+<span class="material-symbols-outlined">videocam_off</span>
+</button>
+<button class="p-4 rounded-full bg-primary/20 dark:bg-primary/30 text-primary dark:text-white">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+<button class="p-4 rounded-full bg-red-500 text-white">
+<span class="material-symbols-outlined">call_end</span>
+</button>
+</div>
+<div class="h-14"></div> 
+</footer>
+</div>
+
+</body></html>
