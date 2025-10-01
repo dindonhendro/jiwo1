@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
 import Navbar from "@/components/navbar";
+import Chatbot from "@/components/chatbot";
 import {
   ArrowUpRight,
   Heart,
@@ -259,7 +260,97 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Chatbot Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 text-gray-900">
+              Asisten AI Kesehatan Mental
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Dapatkan dukungan instan dari asisten AI kami yang tersedia 24/7. 
+              Klik tombol chat di pojok kanan bawah untuk memulai percakapan.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="space-y-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Chat Real-time</h3>
+                    <p className="text-gray-600">Percakapan langsung dengan AI yang memahami konteks kesehatan mental</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Brain className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Analisis Cerdas</h3>
+                    <p className="text-gray-600">AI yang dilatih khusus untuk memberikan dukungan kesehatan mental</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Aman & Privat</h3>
+                    <p className="text-gray-600">Semua percakapan dienkripsi dan dijaga kerahasiaannya</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-4 h-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900 mb-2">Tersedia 24/7</h3>
+                    <p className="text-gray-600">Dukungan kapan saja Anda membutuhkannya, tanpa menunggu</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-2xl">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                    Mulai Chat Sekarang
+                  </h3>
+                  <p className="text-gray-600 mb-6">
+                    Asisten AI siap membantu Anda dengan pertanyaan seputar kesehatan mental, 
+                    memberikan tips, dan mendengarkan keluh kesah Anda.
+                  </p>
+                  <div className="bg-white p-4 rounded-lg shadow-sm border">
+                    <p className="text-sm text-gray-500 mb-2">Contoh pertanyaan:</p>
+                    <div className="space-y-2 text-left">
+                      <p className="text-sm text-gray-700">• "Bagaimana cara mengatasi stres?"</p>
+                      <p className="text-sm text-gray-700">• "Saya merasa cemas, apa yang harus dilakukan?"</p>
+                      <p className="text-sm text-gray-700">• "Tips untuk tidur lebih baik?"</p>
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-4">
+                    💬 Klik tombol chat biru di pojok kanan bawah
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
+      
+      {/* Chatbot Component */}
+      <Chatbot />
     </div>
   );
 }
