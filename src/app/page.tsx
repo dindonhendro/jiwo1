@@ -17,7 +17,6 @@ import {
   Lock,
   TrendingUp,
 } from "lucide-react";
-import { createClient } from "../../supabase/server";
 import {
   Card,
   CardContent,
@@ -26,19 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export default async function Home() {
-  let user = null;
-  
-  try {
-    const supabase = await createClient();
-    if (supabase && supabase.auth) {
-      const { data: { user: authUser } } = await supabase.auth.getUser();
-      user = authUser;
-    }
-  } catch (error) {
-    console.log("Auth error:", error);
-  }
-
+export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f8f6f3] via-white to-[#f1ede8] dark:from-[#1b1918] dark:via-[#1f1d1a] dark:to-[#1b1918]">
       <Navbar />
