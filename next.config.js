@@ -2,7 +2,20 @@
 
 const nextConfig = {
     images: {
-        domains: ['images.unsplash.com'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'images.unsplash.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'api.dicebear.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
     },
     // PWA Configuration
     async headers() {

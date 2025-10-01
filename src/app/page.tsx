@@ -2,6 +2,7 @@ import Footer from "@/components/footer";
 import Hero from "@/components/hero";
 import Navbar from "@/components/navbar";
 import Chatbot from "@/components/chatbot";
+import Link from "next/link";
 import {
   ArrowUpRight,
   Heart,
@@ -11,6 +12,10 @@ import {
   Brain,
   Clock,
   CheckCircle2,
+  Zap,
+  Smartphone,
+  Lock,
+  TrendingUp,
 } from "lucide-react";
 import { createClient } from "../../supabase/server";
 import {
@@ -22,339 +27,338 @@ import {
 } from "@/components/ui/card";
 
 export default async function Home() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  
+  try {
+    const supabase = await createClient();
+    if (supabase && supabase.auth) {
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      user = authUser;
+    }
+  } catch (error) {
+    console.log("Auth error:", error);
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f6f3] via-white to-[#f1ede8] dark:from-[#1b1918] dark:via-[#1f1d1a] dark:to-[#1b1918]">
       <Navbar />
-      <Hero />
+      
+      {/* Hero Section with AI Self-Therapy Focus */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&q=80"
+            alt="Happy woman in nature - representing mental wellness"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+        </div>
 
-      {/* AI Assistant Section - Moved to Top */}
-      <section className="py-20 bg-gradient-to-br from-[#756657]/5 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-[#161413] dark:text-[#eeedec]">
-              Asisten AI Kesehatan Mental
-            </h2>
-            <p className="text-[#7a736c] dark:text-[#a19991] max-w-2xl mx-auto text-lg">
-              Dapatkan dukungan instan dari asisten AI kami yang tersedia 24/7. 
-              Klik tombol chat di pojok kanan atas untuk memulai percakapan.
-            </p>
+        {/* AI Status Indicator */}
+        <div className="absolute top-8 right-8 z-20">
+          <div className="bg-green-500 text-white px-4 py-2 rounded-full flex items-center space-x-2 shadow-lg">
+            <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+            <span className="text-sm font-semibold">AI Terapis Online</span>
           </div>
+        </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-[#756657]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-4 h-4 text-[#756657]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[#161413] dark:text-[#eeedec] mb-2">Chat Real-time</h3>
-                    <p className="text-[#7a736c] dark:text-[#a19991]">Percakapan langsung dengan AI yang memahami konteks kesehatan mental</p>
-                  </div>
-                </div>
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white">
+          <div className="mb-6">
+            <span className="inline-block bg-gradient-to-r from-[#756657] to-[#756657]/80 text-white px-6 py-2 rounded-full text-sm font-semibold mb-4">
+              SELF Therapy Berbasis AI - Cepat, Mudah, Terjangkau & Privat
+            </span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            Terapi AI Mandiri
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#756657] to-[#a08875]">
+              Kapan Saja, Di Mana Saja
+            </span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed opacity-90">
+            Dapatkan dukungan kesehatan mental instan dengan AI terapis yang tersedia 24/7. 
+            Tanpa antrian, tanpa biaya tersembunyi, 100% privat.
+          </p>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-[#756657]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Brain className="w-4 h-4 text-[#756657]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[#161413] dark:text-[#eeedec] mb-2">Analisis Cerdas</h3>
-                    <p className="text-[#7a736c] dark:text-[#a19991]">AI yang dilatih khusus untuk memberikan dukungan kesehatan mental</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-[#756657]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-4 h-4 text-[#756657]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[#161413] dark:text-[#eeedec] mb-2">Aman & Privat</h3>
-                    <p className="text-[#7a736c] dark:text-[#a19991]">Semua percakapan dienkripsi dan dijaga kerahasiaannya</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-[#756657]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-4 h-4 text-[#756657]" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[#161413] dark:text-[#eeedec] mb-2">Tersedia 24/7</h3>
-                    <p className="text-[#7a736c] dark:text-[#a19991]">Dukungan kapan saja Anda membutuhkannya, tanpa menunggu</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-[#756657]/5 to-[#756657]/10 p-8 rounded-2xl border border-[#756657]/20">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-[#756657] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <MessageCircle className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-[#161413] dark:text-[#eeedec] mb-3">
-                    Mulai Chat Sekarang
-                  </h3>
-                  <p className="text-[#7a736c] dark:text-[#a19991] mb-6">
-                    Asisten AI siap membantu Anda dengan pertanyaan seputar kesehatan mental, 
-                    memberikan tips, dan mendengarkan keluh kesah Anda.
-                  </p>
-                  <div className="bg-white dark:bg-[#1b1918] p-4 rounded-lg shadow-sm border border-[#756657]/20">
-                    <p className="text-sm text-[#7a736c] dark:text-[#a19991] mb-2">Contoh pertanyaan:</p>
-                    <div className="space-y-2 text-left">
-                      <p className="text-sm text-[#161413] dark:text-[#eeedec]">• "Bagaimana cara mengatasi stres?"</p>
-                      <p className="text-sm text-[#161413] dark:text-[#eeedec]">• "Saya merasa cemas, apa yang harus dilakukan?"</p>
-                      <p className="text-sm text-[#161413] dark:text-[#eeedec]">• "Tips untuk tidur lebih baik?"</p>
-                    </div>
-                  </div>
-                  <div className="mt-4 p-3 bg-[#756657]/10 rounded-lg border border-[#756657]/20">
-                    <p className="text-sm font-medium text-[#756657] mb-1">
-                      💬 Chat Online Tersedia
-                    </p>
-                    <p className="text-xs text-[#7a736c] dark:text-[#a19991]">
-                      Klik tombol chat di pojok kanan atas untuk mulai berbicara dengan AI
-                    </p>
-                  </div>
-                </div>
-              </div>
+          {/* Benefits Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <Zap className="w-8 h-8 text-[#756657] mx-auto mb-2" />
+              <div className="text-sm font-semibold">Akses Instan</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <Lock className="w-8 h-8 text-[#756657] mx-auto mb-2" />
+              <div className="text-sm font-semibold">100% Privat</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <Heart className="w-8 h-8 text-[#756657] mx-auto mb-2" />
+              <div className="text-sm font-semibold">Terjangkau</div>
+            </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+              <Clock className="w-8 h-8 text-[#756657] mx-auto mb-2" />
+              <div className="text-sm font-semibold">24/7 Siap</div>
             </div>
           </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="inline-flex items-center space-x-4 bg-white dark:bg-[#1b1918] p-2 rounded-full shadow-lg border border-[#756657]/20">
+              <Link
+                href="/sign-up"
+                className="inline-flex items-center px-8 py-3 text-white bg-gradient-to-r from-[#756657] to-[#756657]/90 rounded-full hover:from-[#756657]/90 hover:to-[#756657]/80 transition-all duration-300 font-semibold"
+              >
+                <Brain className="w-5 h-5 mr-2" />
+                Mulai Terapi AI Gratis
+                <ArrowUpRight className="w-4 h-4 ml-2" />
+              </Link>
+              <Link
+                href="/chat"
+                className="inline-flex items-center px-6 py-3 text-[#756657] hover:text-[#756657]/80 transition-colors font-semibold"
+              >
+                Coba AI Terapis Gratis
+              </Link>
+            </div>
+          </div>
+          
+          <p className="text-sm opacity-75 mt-4">
+            Tanpa biaya, tanpa komitmen, tanpa antrian
+          </p>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-white dark:bg-[#1b1918]">
-        <div className="container mx-auto px-4">
+      {/* AI Self-Therapy Vision Section */}
+      <section className="py-20 bg-white dark:bg-[#1b1918]">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-[#eeedec]">
-              Dukungan Kesehatan Mental Komprehensif
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Visi Kami: Self Therapy Berbasis AI
             </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg dark:text-[#a19991]">
-              Platform kami menyediakan alat berbasis bukti dan dukungan profesional 
-              untuk membantu perjalanan kesehatan mental Anda.
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Kami percaya setiap orang berhak mendapatkan dukungan kesehatan mental yang cepat, mudah, terjangkau, dan privat
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: <Brain className="w-8 h-8" />,
-                title: "Skrining Kesehatan Mental",
-                description:
-                  "Penilaian komprehensif dengan wawasan dan rekomendasi yang dipersonalisasi",
-              },
-              {
-                icon: <Heart className="w-8 h-8" />,
-                title: "Jurnal Harian",
-                description:
-                  "Lacak pikiran dan emosi Anda dengan analisis sentimen bertenaga AI",
-              },
-              {
-                icon: <MessageCircle className="w-8 h-8" />,
-                title: "Chat Profesional",
-                description:
-                  "Komunikasi real-time dengan profesional kesehatan mental berlisensi",
-              },
-              {
-                icon: <Shield className="w-8 h-8" />,
-                title: "Dukungan Krisis",
-                description:
-                  "Deteksi krisis 24/7 dan intervensi profesional segera",
-              },
-            ].map((feature, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-lg transition-shadow duration-300"
-              >
-                <CardHeader className="text-center">
-                  <div className="text-blue-600 mb-4 flex justify-center">
-                    {feature.icon}
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            ))}
+            <Card className="border-[#756657]/20 hover:border-[#756657]/40 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="text-[#756657]">Cepat</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  Akses instan tanpa antrian. AI terapis siap membantu dalam hitungan detik.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-[#756657]/20 hover:border-[#756657]/40 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Smartphone className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="text-[#756657]">Mudah</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  Interface sederhana, dapat diakses dari mana saja dengan smartphone atau komputer.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-[#756657]/20 hover:border-[#756657]/40 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="text-[#756657]">Terjangkau</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  Biaya jauh lebih murah dibanding terapi tradisional. Mulai gratis, lanjut dengan harga terjangkau.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-[#756657]/20 hover:border-[#756657]/40 transition-colors">
+              <CardHeader className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Lock className="w-8 h-8 text-white" />
+                </div>
+                <CardTitle className="text-[#756657]">Privat</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 dark:text-gray-300 text-center">
+                  100% anonim dan rahasia. Data Anda terenkripsi dan tidak dibagikan kepada siapapun.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 bg-gray-50 dark:bg-[#1b1918]">
-        <div className="container mx-auto px-4">
+      {/* Interactive AI Chat Demo */}
+      <section className="py-20 bg-gradient-to-br from-[#f8f6f3] to-[#f1ede8] dark:from-[#1f1d1a] dark:to-[#1b1918]">
+        <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-[#eeedec]">
-              Cara Kerja
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Rasakan Pengalaman AI Terapis
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto dark:text-[#a19991]">
-              Langkah sederhana untuk memulai perjalanan kesehatan mental Anda
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Lihat bagaimana AI terapis kami membantu Anda dengan empati dan pemahaman yang mendalam
             </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white dark:bg-[#1b1918] rounded-2xl shadow-2xl border border-[#756657]/20 overflow-hidden">
+              <div className="bg-gradient-to-r from-[#756657] to-[#756657]/90 p-4 flex items-center">
+                <div className="w-3 h-3 bg-white/30 rounded-full mr-2"></div>
+                <div className="w-3 h-3 bg-white/30 rounded-full mr-2"></div>
+                <div className="w-3 h-3 bg-white/30 rounded-full mr-4"></div>
+                <span className="text-white font-semibold">Chat dengan AI Terapis</span>
+                <div className="ml-auto flex items-center text-white/80 text-sm">
+                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                  Online
+                </div>
+              </div>
+              
+              <div className="p-6 space-y-4 h-96 overflow-y-auto">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center">
+                    <Brain className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-xs">
+                    <p className="text-sm">Halo! Saya AI Terapis Jiwo. Bagaimana perasaan Anda hari ini?</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3 justify-end">
+                  <div className="bg-[#756657] text-white rounded-lg p-3 max-w-xs">
+                    <p className="text-sm">Saya merasa cemas tentang pekerjaan...</p>
+                  </div>
+                  <div className="w-8 h-8 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+                </div>
+                
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center">
+                    <Brain className="w-4 h-4 text-white" />
+                  </div>
+                  <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-xs">
+                    <p className="text-sm">Saya memahami perasaan cemas Anda. Mari kita eksplorasi lebih dalam. Apa yang spesifik membuat Anda cemas tentang pekerjaan?</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="text"
+                    placeholder="Ketik pesan Anda..."
+                    className="flex-1 p-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#756657] dark:bg-gray-800"
+                    disabled
+                  />
+                  <button className="bg-[#756657] text-white p-3 rounded-lg hover:bg-[#756657]/90 transition-colors">
+                    <MessageCircle className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Our AI Therapist */}
+      <section className="py-20 bg-white dark:bg-[#1b1918]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+              Mengapa Memilih AI Terapis Kami?
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "1",
-                title: "Daftar & Pilih Peran Anda",
-                description:
-                  "Buat akun Anda dan pilih apakah Anda mencari dukungan atau Anda adalah profesional kesehatan mental",
-              },
-              {
-                step: "2",
-                title: "Lengkapi Penilaian Anda",
-                description:
-                  "Ikuti skrining komprehensif kami untuk memahami status kesehatan mental Anda saat ini",
-              },
-              {
-                step: "3",
-                title: "Akses Dukungan Personal",
-                description:
-                  "Dapatkan pencocokan dengan profesional, lacak kemajuan, dan akses sumber daya yang disesuaikan",
-              },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
-                  {item.step}
-                </div>
-                <h3 className="text-xl font-semibold mb-4">{item.title}</h3>
-                <p className="text-gray-600 dark:text-[#a19991]">{item.description}</p>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Brain className="w-10 h-10 text-white" />
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">AI Canggih</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Dilatih dengan ribuan kasus terapi nyata dan teknik CBT terbukti efektif
+              </p>
+            </div>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-blue-600 text-white dark:bg-[#1b1918]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Membuat Dampak Nyata</h2>
-            <p className="text-blue-100 max-w-2xl mx-auto dark:text-[#a19991]">
-              Platform kami membantu orang di seluruh dunia meningkatkan 
-              kesehatan mental mereka
-            </p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold mb-2">10K+</div>
-              <div className="text-blue-100 dark:text-[#a19991]">Pengguna Aktif</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-blue-100 dark:text-[#a19991]">Profesional Berlisensi</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">24/7</div>
-              <div className="text-blue-100 dark:text-[#a19991]">Dukungan Krisis</div>
-            </div>
-            <div>
-              <div className="text-4xl font-bold mb-2">95%</div>
-              <div className="text-blue-100 dark:text-[#a19991]">Kepuasan Pengguna</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-20 bg-white dark:bg-[#1b1918]">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-[#eeedec]">
-              Mengapa Memilih Platform Kami
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto dark:text-[#a19991]">
-              Pendekatan berbasis bukti dengan teknologi mutakhir
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Shield className="w-6 h-6" />,
-                title: "Kepatuhan HIPAA",
-                description:
-                  "Privasi dan keamanan data Anda adalah prioritas utama kami",
-              },
-              {
-                icon: <Clock className="w-6 h-6" />,
-                title: "Dukungan Real-time",
-                description:
-                  "Akses instan ke profesional saat Anda paling membutuhkannya",
-              },
-              {
-                icon: <Users className="w-6 h-6" />,
-                title: "Profesional Berlisensi",
-                description: "Terhubung dengan ahli kesehatan mental terverifikasi",
-              },
-              {
-                icon: <Brain className="w-6 h-6" />,
-                title: "Wawasan Bertenaga AI",
-                description: "Analitik canggih untuk melacak kemajuan Anda",
-              },
-              {
-                icon: <Heart className="w-6 h-6" />,
-                title: "Perawatan Personal",
-                description: "Rencana perawatan yang disesuaikan berdasarkan kebutuhan Anda",
-              },
-              {
-                icon: <CheckCircle2 className="w-6 h-6" />,
-                title: "Berbasis Bukti",
-                description: "Perawatan yang didukung oleh penelitian ilmiah",
-              },
-            ].map((benefit, index) => (
-              <div
-                key={index}
-                className="p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors dark:bg-[#1b1918] dark:text-white"
-              >
-                <div className="text-blue-600 mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-gray-600 dark:text-[#a19991]">{benefit.description}</p>
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Shield className="w-10 h-10 text-white" />
               </div>
-            ))}
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Keamanan Terjamin</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Enkripsi end-to-end dan standar keamanan medis internasional
+              </p>
+            </div>
+
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#756657] to-[#756657]/80 rounded-full flex items-center justify-center mx-auto mb-6">
+                <TrendingUp className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Hasil Terukur</h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Tracking progress otomatis dan laporan perkembangan kesehatan mental
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white dark:bg-[#1b1918]">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-4">
+      {/* Statistics */}
+      <section className="py-20 bg-gradient-to-r from-[#756657] to-[#756657]/90">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-8 text-center text-white">
+            <div>
+              <div className="text-5xl font-bold mb-2">50K+</div>
+              <div className="text-xl opacity-90">Sesi Chat AI</div>
+            </div>
+            <div>
+              <div className="text-5xl font-bold mb-2">24/7</div>
+              <div className="text-xl opacity-90">Selalu Online</div>
+            </div>
+            <div>
+              <div className="text-5xl font-bold mb-2">0 Detik</div>
+              <div className="text-xl opacity-90">Waktu Tunggu</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 bg-gradient-to-br from-[#f8f6f3] to-[#f1ede8] dark:from-[#1f1d1a] dark:to-[#1b1918]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Mulai Perjalanan Kesehatan Mental Anda Hari Ini
           </h2>
-          <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-lg dark:text-[#a19991]">
-            Ambil langkah pertama menuju kesehatan mental yang lebih baik. 
-            Bergabunglah dengan ribuan orang yang telah mengubah hidup mereka.
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10">
+            Bergabunglah dengan ribuan orang yang telah merasakan manfaat AI terapis kami
           </p>
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href={user ? "/dashboard" : "/sign-up"}
-              className="inline-flex items-center px-8 py-4 text-blue-600 bg-white rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center px-8 py-4 text-white bg-gradient-to-r from-[#756657] to-[#756657]/90 rounded-full hover:from-[#756657]/90 hover:to-[#756657]/80 transition-all duration-300 font-semibold text-lg shadow-lg"
             >
-              {user ? "Ke Dashboard" : "Mulai Gratis"}
-              <ArrowUpRight className="ml-2 w-5 h-5" />
-            </a>
-            <a
-              href="#features"
-              className="inline-flex items-center px-8 py-4 text-white border-2 border-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors font-semibold"
-            >
-              Pelajari Lebih Lanjut
-            </a>
+              <Brain className="w-6 h-6 mr-3" />
+              Coba AI Terapis Gratis
+              <ArrowUpRight className="w-5 h-5 ml-3" />
+            </Link>
           </div>
-          <p className="text-blue-100 text-sm mt-6">
-            ✓ Tidak perlu kartu kredit ✓ Kepatuhan HIPAA ✓ Dukungan 24/7
-          </p>
         </div>
       </section>
 
       <Footer />
-      
-      {/* Chatbot Component */}
       <Chatbot />
     </div>
   );

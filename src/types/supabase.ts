@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_users: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          id: string
+          permissions: string[] | null
+          role: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          permissions?: string[] | null
+          role: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          permissions?: string[] | null
+          role?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       appointments: {
         Row: {
           appointment_date: string
@@ -123,49 +150,70 @@ export type Database = {
       }
       professionals: {
         Row: {
+          admin_notes: string | null
           available_offline: boolean | null
           available_online: boolean | null
           avatar: string | null
           bio: string | null
+          certifications: string[] | null
           created_at: string | null
+          cv_data: Json | null
+          education: string[] | null
           experience_years: number | null
           id: string
+          is_active: boolean | null
           languages: string[] | null
           name: string
           price_per_session: number | null
           rating: number | null
+          skills: string[] | null
           specialty: string
           treatment_type: string
+          work_experience: Json[] | null
         }
         Insert: {
+          admin_notes?: string | null
           available_offline?: boolean | null
           available_online?: boolean | null
           avatar?: string | null
           bio?: string | null
+          certifications?: string[] | null
           created_at?: string | null
+          cv_data?: Json | null
+          education?: string[] | null
           experience_years?: number | null
           id?: string
+          is_active?: boolean | null
           languages?: string[] | null
           name: string
           price_per_session?: number | null
           rating?: number | null
+          skills?: string[] | null
           specialty: string
           treatment_type: string
+          work_experience?: Json[] | null
         }
         Update: {
+          admin_notes?: string | null
           available_offline?: boolean | null
           available_online?: boolean | null
           avatar?: string | null
           bio?: string | null
+          certifications?: string[] | null
           created_at?: string | null
+          cv_data?: Json | null
+          education?: string[] | null
           experience_years?: number | null
           id?: string
+          is_active?: boolean | null
           languages?: string[] | null
           name?: string
           price_per_session?: number | null
           rating?: number | null
+          skills?: string[] | null
           specialty?: string
           treatment_type?: string
+          work_experience?: Json[] | null
         }
         Relationships: []
       }
@@ -241,6 +289,57 @@ export type Database = {
           token_identifier?: string
           updated_at?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      yoga_vendors: {
+        Row: {
+          admin_notes: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          images: string[] | null
+          is_active: boolean | null
+          location: string | null
+          name: string
+          pricing: Json | null
+          rating: number | null
+          services: string[] | null
+          website: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_active?: boolean | null
+          location?: string | null
+          name: string
+          pricing?: Json | null
+          rating?: number | null
+          services?: string[] | null
+          website?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          is_active?: boolean | null
+          location?: string | null
+          name?: string
+          pricing?: Json | null
+          rating?: number | null
+          services?: string[] | null
+          website?: string | null
         }
         Relationships: []
       }

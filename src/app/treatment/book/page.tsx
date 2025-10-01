@@ -26,8 +26,14 @@ import {
   Calendar,
   DollarSign,
   Languages,
-  Award
+  Award,
+  FileText,
+  Eye,
+  GraduationCap,
+  Briefcase,
+  Shield
 } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { createClient } from "../../../../supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -53,6 +59,11 @@ interface Professional {
   available_online: boolean;
   available_offline: boolean;
   languages: string[];
+  cv_data?: any;
+  education?: string[];
+  certifications?: string[];
+  work_experience?: any[];
+  skills?: string[];
 }
 
 export default function TreatmentBookingPage() {
@@ -256,8 +267,7 @@ export default function TreatmentBookingPage() {
               {professionals.map((professional) => (
                 <Card 
                   key={professional.id}
-                  className="hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => handleProfessionalSelect(professional)}
+                  className="hover:shadow-lg transition-shadow"
                 >
                   <CardHeader>
                     <div className="flex items-start space-x-4">
@@ -312,6 +322,202 @@ export default function TreatmentBookingPage() {
                       <span className="text-xs text-gray-600">
                         {professional.languages.join(', ')}
                       </span>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 pt-2">
+                      <Button 
+                        onClick={() => handleProfessionalSelect(professional)}
+                        className="flex-1"
+                      >
+                        Book Session
+                      </Button>
+                      
+                      {/* CV Dialog */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" size="sm">
+                            <FileText className="w-4 h-4 mr-1" />
+                            View CV
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                          <DialogHeader>
+                            <DialogTitle className="flex items-center">
+                              <Avatar className="w-12 h-12 mr-3">
+                                <AvatarImage src={professional.avatar} />
+                                <AvatarFallback>{professional.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                              </Avatar>
+                              {professional.name} - Professional CV
+                            </DialogTitle>
+                            <DialogDescription>
+                              Complete professional background and qualifications
+                            </DialogDescription>
+                          </DialogHeader>
+                          
+                          <div className="space-y-6">
+                            {/* Professional Summary */}
+                            <div>
+                              <h3 className="text-lg font-semibold mb-2 flex items-center">
+                                <Eye className="w-5 h-5 mr-2 text-blue-600" />
+                                Professional Summary
+                              </h3>
+                              <p className="text-gray-700">{professional.bio}</p>
+                              <div className="mt-2">
+                                <Badge variant="secondary">{professional.specialty}</Badge>
+                                <Badge variant="outline" className="ml-2">{professional.experience_years} years experience</Badge>
+                              </div>
+                            </div>
+
+                            {/* Education */}
+                            {professional.education && professional.education.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                                  <GraduationCap className="w-5 h-5 mr-2 text-green-600" />
+                                  Education
+                                </h3>
+                                <div className="space-y-2">
+                                  {professional.education.map((edu, index) => (
+                                    <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                                      <p className="font-medium text-gray-800">{edu}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Certifications */}
+                            {professional.certifications && professional.certifications.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                                  <Shield className="w-5 h-5 mr-2 text-purple-600" />
+                                  Certifications & Licenses
+                                </h3>
+                                <div className="grid md:grid-cols-2 gap-2">
+                                  {professional.certifications.map((cert, index) => (
+                                    <div key={index} className="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                                      <p className="text-sm font-medium text-purple-800">{cert}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Work Experience */}
+                            {professional.work_experience && professional.work_experience.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                                  <Briefcase className="w-5 h-5 mr-2 text-orange-600" />
+                                  Work Experience
+                                </h3>
+                                <div className="space-y-4">
+                                  {professional.work_experience.map((exp, index) => (
+                                    <div key={index} className="p-4 border border-gray-200 rounded-lg">
+                                      <div className="flex justify-between items-start mb-2">
+                                        <h4 className="font-medium text-gray-800">{exp.position}</h4>
+                                        <Badge variant="outline" className="text-xs">{exp.duration}</Badge>
+                                      </div>
+                                      <p className="text-sm text-gray-600 mb-1">{exp.organization}</p>
+                                      <p className="text-sm text-gray-700">{exp.description}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Skills */}
+                            {professional.skills && professional.skills.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                                  <Star className="w-5 h-5 mr-2 text-yellow-600" />
+                                  Core Skills & Specializations
+                                </h3>
+                                <div className="flex flex-wrap gap-2">
+                                  {professional.skills.map((skill, index) => (
+                                    <Badge key={index} variant="secondary" className="bg-blue-100 text-blue-800">
+                                      {skill}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+
+                            {/* Languages */}
+                            <div>
+                              <h3 className="text-lg font-semibold mb-3 flex items-center">
+                                <Languages className="w-5 h-5 mr-2 text-teal-600" />
+                                Languages
+                              </h3>
+                              <div className="flex flex-wrap gap-2">
+                                {professional.languages.map((lang, index) => (
+                                  <Badge key={index} variant="outline" className="border-teal-200 text-teal-700">
+                                    {lang}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Session Information */}
+                            <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                              <h3 className="text-lg font-semibold mb-2 text-blue-800">Session Information</h3>
+                              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                  <p><strong>Session Fee:</strong> {formatPrice(professional.price_per_session)}</p>
+                                  <p><strong>Rating:</strong> {professional.rating}/5.0</p>
+                                </div>
+                                <div>
+                                  <p><strong>Available:</strong> {[
+                                    professional.available_online && 'Online',
+                                    professional.available_offline && 'In-person'
+                                  ].filter(Boolean).join(', ')}</p>
+                                  <p><strong>Experience:</strong> {professional.experience_years} years</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+
+                      {/* Specialty Info Button */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" size="sm">
+                            <Award className="w-4 h-4 mr-1" />
+                            Specialty
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>{professional.name} - Specialty Information</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-medium mb-2">Primary Specialty</h4>
+                              <Badge variant="secondary" className="text-sm">{professional.specialty}</Badge>
+                            </div>
+                            <div>
+                              <h4 className="font-medium mb-2">Treatment Approach</h4>
+                              <p className="text-sm text-gray-600">{professional.bio}</p>
+                            </div>
+                            {professional.skills && (
+                              <div>
+                                <h4 className="font-medium mb-2">Core Competencies</h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {professional.skills.slice(0, 4).map((skill, index) => (
+                                    <Badge key={index} variant="outline" className="text-xs">
+                                      {skill}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            <div>
+                              <h4 className="font-medium mb-2">Experience Level</h4>
+                              <p className="text-sm text-gray-600">{professional.experience_years} years of professional practice</p>
+                            </div>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </CardContent>
                 </Card>
