@@ -1,6 +1,8 @@
+"use client";
+
 import DashboardNavbar from "@/components/dashboard-navbar";
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,17 +26,23 @@ import {
   MapPin
 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-export default async function Dashboard() {
-  const supabase = await createClient();
+export default function Dashboard() {
+  const [user, setUser] = useState(null);
+  const supabase = createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
-  }
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        redirect("/sign-in");
+      } else {
+        setUser(user);
+      }
+    };
+    getUser();
+  }, []);
 
   const upcomingAppointments = [
     {
@@ -131,11 +139,12 @@ export default async function Dashboard() {
                   <CardDescription>Akses fitur yang paling sering Anda gunakan</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Link href="/screening">
-                      <Button className="h-20 flex-col space-y-2 bg-blue-600 hover:bg-blue-700 w-full">
-                        <Brain className="w-6 h-6" />
-                        <span className="text-sm">Ambil Penilaian</span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* Self Screening - Made bigger */}
+                    <Link href="/screening" className="md:col-span-2">
+                      <Button className="h-24 flex-col space-y-3 bg-blue-600 hover:bg-blue-700 w-full text-lg">
+                        <Brain className="w-8 h-8" />
+                        <span>Self Screening</span>
                       </Button>
                     </Link>
                     <Link href="/journal">
@@ -150,8 +159,10 @@ export default async function Dashboard() {
                         <span className="text-sm">Chat Sekarang</span>
                       </Button>
                     </Link>
+                  </div>
+                  <div className="mt-4">
                     <Link href="/progress">
-                      <Button className="h-20 flex-col space-y-2 bg-orange-600 hover:bg-orange-700 w-full">
+                      <Button className="h-16 flex-col space-y-2 bg-orange-600 hover:bg-orange-700 w-full">
                         <TrendingUp className="w-6 h-6" />
                         <span className="text-sm">Lihat Kemajuan</span>
                       </Button>

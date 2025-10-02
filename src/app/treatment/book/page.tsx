@@ -5,7 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Heart, Brain, Apple, Target, Flower2, Palette, ArrowLeft, Star, MapPin, DollarSign, FileText, Award } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { Heart, Brain, Apple, Target, Flower2, Palette, ArrowLeft, Star, MapPin, DollarSign, FileText, Award, Clock, CalendarDays } from "lucide-react";
 import { createClient } from "../../../../supabase/client";
 import { useRouter } from "next/navigation";
 
@@ -33,10 +34,19 @@ interface Professional {
   languages: string[];
 }
 
+const TIME_SLOTS = [
+  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+  "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
+];
+
 export default function TreatmentBookingPage() {
-  const [step, setStep] = useState<'method' | 'professional' | 'payment'>('method');
+  const [step, setStep] = useState<'method' | 'professional' | 'booking' | 'payment'>('method');
   const [selectedMethod, setSelectedMethod] = useState<string>("");
   const [selectedProfessional, setSelectedProfessional] = useState<Professional | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<string>("");
+  const [sessionType, setSessionType] = useState<'online' | 'offline'>('online');
   const [professionals, setProfessionals] = useState<Professional[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
@@ -109,19 +119,31 @@ export default function TreatmentBookingPage() {
   const handleBackToProfessionals = () => {
     setStep('professional');
     setSelectedProfessional(null);
+    setSelectedDate(undefined);
+    setSelectedTime('');
+  };
+
+  const handleBackToBooking = () => {
+    setStep('booking');
   };
 
   const handleBookProfessional = (professional: Professional) => {
     setSelectedProfessional(professional);
-    setStep('payment');
+    setStep('booking');
+  };
+
+  const handleProceedToPayment = () => {
+    if (selectedDate && selectedTime) {
+      setStep('payment');
+    }
   };
 
   const handleViewCV = (professional: Professional) => {
-    alert(`Viewing CV for ${professional.name}\n\nSpecialty: ${professional.specialty}\nExperience: ${professional.experience_years} years\nRating: ${professional.rating}/5`);
+    alert(`Viewing CV for ${professional.name}\\n\\nSpecialty: ${professional.specialty}\\nExperience: ${professional.experience_years} years\\nRating: ${professional.rating}/5`);
   };
 
   const handleViewSpecialty = (professional: Professional) => {
-    alert(`Specialty Details for ${professional.name}\n\n${professional.specialty}\n\n${professional.bio}`);
+    alert(`Specialty Details for ${professional.name}\\n\\n${professional.specialty}\\n\\n${professional.bio}`);
   };
 
   const formatPrice = (price: number) => {
@@ -130,6 +152,15 @@ export default function TreatmentBookingPage() {
       currency: 'IDR',
       minimumFractionDigits: 0
     }).format(price);
+  };
+
+  const formatDate = (date: Date) => {
+    return new Intl.DateTimeFormat('id-ID', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }).format(date);
   };
 
   // Method Selection Step
@@ -300,8 +331,8 @@ export default function TreatmentBookingPage() {
     );
   }
 
-  // Payment Step with QRIS
-  if (step === 'payment' && selectedProfessional) {
+  // Booking Step with Calendar and Time Selection
+  if (step === 'booking' && selectedProfessional) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
         <div className="max-w-4xl mx-auto">
@@ -313,6 +344,163 @@ export default function TreatmentBookingPage() {
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Professionals
+            </Button>
+          </div>
+
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <CalendarDays className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">Schedule Your Session</h1>
+            <p className="text-gray-600">Choose date and time for your therapy session</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Professional Info */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Session Details</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center space-x-4">
+                  <Avatar className="w-16 h-16">
+                    <AvatarImage src={selectedProfessional.avatar} alt={selectedProfessional.name} />
+                    <AvatarFallback>{selectedProfessional.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="font-semibold text-lg">{selectedProfessional.name}</h3>
+                    <p className="text-gray-600">{selectedProfessional.specialty}</p>
+                    <div className="flex items-center mt-1">
+                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                      <span className="text-sm text-gray-600 ml-1">{selectedProfessional.rating}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="border-t pt-4">
+                  <div className="flex justify-between items-center mb-2">
+                    <span>Treatment Method:</span>
+                    <span className="font-medium">{TREATMENT_METHODS[selectedMethod as keyof typeof TREATMENT_METHODS]?.name}</span>
+                  </div>
+                  <div className="flex justify-between items-center mb-4">
+                    <span>Session Fee:</span>
+                    <span className="font-medium">{formatPrice(selectedProfessional.price_per_session)}</span>
+                  </div>
+
+                  {/* Session Type Selection */}
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Session Type:</label>
+                    <div className="flex gap-2">
+                      {selectedProfessional.available_online && (
+                        <Button
+                          variant={sessionType === 'online' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setSessionType('online')}
+                        >
+                          Online
+                        </Button>
+                      )}
+                      {selectedProfessional.available_offline && (
+                        <Button
+                          variant={sessionType === 'offline' ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setSessionType('offline')}
+                        >
+                          Offline
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Date and Time Selection */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Select Date & Time</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Calendar */}
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Choose Date:</label>
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    disabled={(date) => date < new Date() || date.getDay() === 0} // Disable past dates and Sundays
+                    className="rounded-md border"
+                  />
+                </div>
+
+                {/* Time Slots */}
+                {selectedDate && (
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Choose Time:</label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {TIME_SLOTS.map((time) => (
+                        <Button
+                          key={time}
+                          variant={selectedTime === time ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => setSelectedTime(time)}
+                          className="text-xs"
+                        >
+                          <Clock className="w-3 h-3 mr-1" />
+                          {time}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Booking Summary */}
+                {selectedDate && selectedTime && (
+                  <div className="p-4 bg-blue-50 rounded-lg">
+                    <h4 className="font-medium mb-2">Booking Summary:</h4>
+                    <p className="text-sm text-gray-700">
+                      <strong>Date:</strong> {formatDate(selectedDate)}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <strong>Time:</strong> {selectedTime}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <strong>Type:</strong> {sessionType === 'online' ? 'Online Session' : 'Offline Session'}
+                    </p>
+                    <p className="text-sm text-gray-700">
+                      <strong>Duration:</strong> 60 minutes
+                    </p>
+                  </div>
+                )}
+
+                <Button 
+                  className="w-full" 
+                  onClick={handleProceedToPayment}
+                  disabled={!selectedDate || !selectedTime}
+                >
+                  Proceed to Payment
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Payment Step with QRIS
+  if (step === 'payment' && selectedProfessional && selectedDate && selectedTime) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center mb-6">
+            <Button 
+              variant="ghost" 
+              onClick={handleBackToBooking}
+              className="mr-4"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Booking
             </Button>
           </div>
 
@@ -346,16 +534,28 @@ export default function TreatmentBookingPage() {
                   </div>
                 </div>
 
-                <div className="border-t pt-4">
-                  <div className="flex justify-between items-center mb-2">
+                <div className="border-t pt-4 space-y-2">
+                  <div className="flex justify-between items-center">
                     <span>Treatment Method:</span>
                     <span className="font-medium">{TREATMENT_METHODS[selectedMethod as keyof typeof TREATMENT_METHODS]?.name}</span>
                   </div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center">
+                    <span>Date:</span>
+                    <span className="font-medium">{formatDate(selectedDate)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Time:</span>
+                    <span className="font-medium">{selectedTime}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Session Type:</span>
+                    <span className="font-medium">{sessionType === 'online' ? 'Online' : 'Offline'}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
                     <span>Session Fee:</span>
                     <span className="font-medium">{formatPrice(selectedProfessional.price_per_session)}</span>
                   </div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center">
                     <span>Platform Fee:</span>
                     <span className="font-medium">Rp 25.000</span>
                   </div>
