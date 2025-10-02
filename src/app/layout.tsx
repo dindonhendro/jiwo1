@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import { TempoInit } from "@/components/tempo-init";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -13,11 +12,6 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   themeColor: "#2563eb",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Jiwo.AI",
-  },
   icons: {
     apple: "/icon-192x192.png",
   },
