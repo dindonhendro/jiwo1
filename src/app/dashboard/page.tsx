@@ -143,7 +143,7 @@ export default function Dashboard() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Self Screening - Made bigger */}
                     <Link href="/screening" className="md:col-span-2">
-                      <Button className="h-24 flex-col space-y-3 bg-blue-600 hover:bg-blue-700 w-full text-lg">
+                      <Button className="h-24 flex-col space-y-3 bg-yellow-400 hover:bg-yellow-500 text-black w-full text-lg">
                         <Brain className="w-8 h-8" />
                         <span>Self Screening</span>
                       </Button>

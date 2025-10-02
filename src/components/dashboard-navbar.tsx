@@ -16,6 +16,16 @@ export default function DashboardNavbar() {
   const supabase = createClient()
   const router = useRouter()
 
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut()
+      router.push('/sign-in')
+      router.refresh()
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
+  }
+
   return (
     <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4">
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -60,10 +70,7 @@ export default function DashboardNavbar() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="bg-white dark:bg-[#302d2a] border-[#756657]/20">
               <DropdownMenuItem 
-                onClick={async () => {
-                  await supabase.auth.signOut()
-                  router.refresh()
-                }}
+                onClick={handleSignOut}
                 className="text-[#161413] dark:text-[#eeedec] hover:bg-[#756657]/10"
               >
                 Sign out
