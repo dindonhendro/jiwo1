@@ -35,9 +35,7 @@ interface Professional {
 }
 
 const TIME_SLOTS = [
-  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
-  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-  "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
+  "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"
 ];
 
 export default function TreatmentBookingPage() {
@@ -139,11 +137,11 @@ export default function TreatmentBookingPage() {
   };
 
   const handleViewCV = (professional: Professional) => {
-    alert(`Viewing CV for ${professional.name}\\n\\nSpecialty: ${professional.specialty}\\nExperience: ${professional.experience_years} years\\nRating: ${professional.rating}/5`);
+    alert(`Viewing CV for ${professional.name}\n\nSpecialty: ${professional.specialty}\nExperience: ${professional.experience_years} years\nRating: ${professional.rating}/5`);
   };
 
   const handleViewSpecialty = (professional: Professional) => {
-    alert(`Specialty Details for ${professional.name}\\n\\n${professional.specialty}\\n\\n${professional.bio}`);
+    alert(`Specialty Details for ${professional.name}\n\n${professional.specialty}\n\n${professional.bio}`);
   };
 
   const formatPrice = (price: number) => {
@@ -168,6 +166,18 @@ export default function TreatmentBookingPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
         <div className="max-w-6xl mx-auto">
+          {/* Back Button */}
+          <div className="flex items-center mb-6">
+            <Button 
+              variant="ghost" 
+              onClick={() => router.push('/dashboard')}
+              className="mr-4"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Dashboard
+            </Button>
+          </div>
+
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <Heart className="w-8 h-8 text-white" />
@@ -352,7 +362,7 @@ export default function TreatmentBookingPage() {
               <CalendarDays className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Schedule Your Session</h1>
-            <p className="text-gray-600">Choose date and time for your therapy session</p>
+            <p className="text-gray-600">Choose date, time, and session type</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -377,39 +387,49 @@ export default function TreatmentBookingPage() {
                   </div>
                 </div>
 
-                <div className="border-t pt-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span>Treatment Method:</span>
-                    <span className="font-medium">{TREATMENT_METHODS[selectedMethod as keyof typeof TREATMENT_METHODS]?.name}</span>
+                {/* Session Type Selection */}
+                <div className="space-y-3">
+                  <h4 className="font-medium">Session Type</h4>
+                  <div className="space-y-2">
+                    {selectedProfessional.available_online && (
+                      <label className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+                        <input
+                          type="radio"
+                          name="sessionType"
+                          value="online"
+                          checked={sessionType === 'online'}
+                          onChange={(e) => setSessionType(e.target.value as 'online' | 'offline')}
+                          className="text-blue-600"
+                        />
+                        <div>
+                          <div className="font-medium">Online Session</div>
+                          <div className="text-sm text-gray-600">Video call via secure platform</div>
+                        </div>
+                      </label>
+                    )}
+                    {selectedProfessional.available_offline && (
+                      <label className="flex items-center space-x-3 p-3 border rounded-lg cursor-pointer hover:bg-blue-50">
+                        <input
+                          type="radio"
+                          name="sessionType"
+                          value="offline"
+                          checked={sessionType === 'offline'}
+                          onChange={(e) => setSessionType(e.target.value as 'online' | 'offline')}
+                          className="text-blue-600"
+                        />
+                        <div>
+                          <div className="font-medium">In-Person Session</div>
+                          <div className="text-sm text-gray-600">Face-to-face at clinic</div>
+                        </div>
+                      </label>
+                    )}
                   </div>
-                  <div className="flex justify-between items-center mb-4">
+                </div>
+
+                <div className="border-t pt-4">
+                  <div className="flex justify-between items-center">
                     <span>Session Fee:</span>
                     <span className="font-medium">{formatPrice(selectedProfessional.price_per_session)}</span>
-                  </div>
-
-                  {/* Session Type Selection */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Session Type:</label>
-                    <div className="flex gap-2">
-                      {selectedProfessional.available_online && (
-                        <Button
-                          variant={sessionType === 'online' ? 'default' : 'outline'}
-                          size="sm"
-                          onClick={() => setSessionType('online')}
-                        >
-                          Online
-                        </Button>
-                      )}
-                      {selectedProfessional.available_offline && (
-                        <Button
-                          variant={sessionType === 'offline' ? 'default' : 'outline'}
-                          size="sm"
-                          onClick={() => setSessionType('offline')}
-                        >
-                          Offline
-                        </Button>
-                      )}
-                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -423,7 +443,7 @@ export default function TreatmentBookingPage() {
               <CardContent className="space-y-6">
                 {/* Calendar */}
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Choose Date:</label>
+                  <h4 className="font-medium mb-3">Choose Date</h4>
                   <Calendar
                     mode="single"
                     selected={selectedDate}
@@ -436,17 +456,16 @@ export default function TreatmentBookingPage() {
                 {/* Time Slots */}
                 {selectedDate && (
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Choose Time:</label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <h4 className="font-medium mb-3">Available Times</h4>
+                    <div className="grid grid-cols-4 gap-2">
                       {TIME_SLOTS.map((time) => (
                         <Button
                           key={time}
-                          variant={selectedTime === time ? 'default' : 'outline'}
+                          variant={selectedTime === time ? "default" : "outline"}
                           size="sm"
                           onClick={() => setSelectedTime(time)}
-                          className="text-xs"
+                          className="text-sm"
                         >
-                          <Clock className="w-3 h-3 mr-1" />
                           {time}
                         </Button>
                       ))}
@@ -454,10 +473,10 @@ export default function TreatmentBookingPage() {
                   </div>
                 )}
 
-                {/* Booking Summary */}
+                {/* Summary */}
                 {selectedDate && selectedTime && (
                   <div className="p-4 bg-blue-50 rounded-lg">
-                    <h4 className="font-medium mb-2">Booking Summary:</h4>
+                    <h4 className="font-medium mb-2">Booking Summary</h4>
                     <p className="text-sm text-gray-700">
                       <strong>Date:</strong> {formatDate(selectedDate)}
                     </p>
@@ -465,10 +484,7 @@ export default function TreatmentBookingPage() {
                       <strong>Time:</strong> {selectedTime}
                     </p>
                     <p className="text-sm text-gray-700">
-                      <strong>Type:</strong> {sessionType === 'online' ? 'Online Session' : 'Offline Session'}
-                    </p>
-                    <p className="text-sm text-gray-700">
-                      <strong>Duration:</strong> 60 minutes
+                      <strong>Type:</strong> {sessionType === 'online' ? 'Online Session' : 'In-Person Session'}
                     </p>
                   </div>
                 )}
@@ -549,7 +565,7 @@ export default function TreatmentBookingPage() {
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Session Type:</span>
-                    <span className="font-medium">{sessionType === 'online' ? 'Online' : 'Offline'}</span>
+                    <span className="font-medium">{sessionType === 'online' ? 'Online' : 'In-Person'}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span>Session Fee:</span>

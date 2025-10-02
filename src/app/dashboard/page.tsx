@@ -1,7 +1,6 @@
 "use client";
 
 import DashboardNavbar from "@/components/dashboard-navbar";
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,22 +26,24 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const supabase = createClient();
+  const router = useRouter();
 
   useEffect(() => {
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        redirect("/sign-in");
+        router.push("/sign-in");
       } else {
         setUser(user);
       }
     };
     getUser();
-  }, []);
+  }, [router, supabase.auth]);
 
   const upcomingAppointments = [
     {

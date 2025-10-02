@@ -1,337 +1,306 @@
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, TrendingUp, Calendar, Target, BookOpen, Brain, Heart, Award, BarChart3, LineChart, PieChart } from "lucide-react";
+import { ArrowLeft, TrendingUp, Calendar, Target, BookOpen, Brain, Heart, Award, BarChart3, LineChart } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
 export default function ProgressPage() {
-  const [user, setUser] = useState(null);
-  const supabase = createClient();
+  // Mock data for progress tracking
+  const progressData = {
+    screenings: {
+      total: 12,
+      thisMonth: 3,
+      trend: "+15%"
+    },
+    journalEntries: {
+      total: 45,
+      thisMonth: 8,
+      trend: "+22%"
+    },
+    moodScore: {
+      current: 7.2,
+      previous: 6.8,
+      trend: "+5.9%"
+    },
+    streakDays: 14
+  };
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        redirect("/sign-in");
-      } else {
-        setUser(user);
-      }
-    };
-    getUser();
-  }, []);
-
-  // Mock progress data
-  const weeklyProgress = [
-    { day: "Sen", mood: 7, journal: 1, screening: 0 },
-    { day: "Sel", mood: 6, journal: 1, screening: 1 },
-    { day: "Rab", mood: 8, journal: 1, screening: 0 },
-    { day: "Kam", mood: 7, journal: 1, screening: 0 },
-    { day: "Jum", mood: 9, journal: 1, screening: 0 },
-    { day: "Sab", mood: 8, journal: 1, screening: 1 },
-    { day: "Min", mood: 7, journal: 1, screening: 0 }
+  const recentActivities = [
+    { type: "screening", name: "PHQ-9 Depression Screening", date: "2024-01-15", score: "Mild" },
+    { type: "journal", name: "Daily Reflection", date: "2024-01-14", mood: "Good" },
+    { type: "screening", name: "GAD-7 Anxiety Screening", date: "2024-01-12", score: "Minimal" },
+    { type: "journal", name: "Gratitude Journal", date: "2024-01-11", mood: "Excellent" }
   ];
 
-  const screeningHistory = [
-    { date: "2024-01-15", type: "PHQ-9", score: 8, severity: "Mild Depression", color: "text-yellow-600" },
-    { date: "2024-01-10", type: "GAD-7", score: 12, severity: "Moderate Anxiety", color: "text-orange-600" },
-    { date: "2024-01-05", type: "PHQ-9", score: 14, severity: "Moderate Depression", color: "text-orange-600" },
-    { date: "2024-01-01", type: "GAD-7", score: 16, severity: "Severe Anxiety", color: "text-red-600" }
-  ];
-
-  const achievements = [
-    { title: "7 Hari Berturut-turut", description: "Menulis jurnal setiap hari", icon: BookOpen, color: "bg-blue-600" },
-    { title: "Screening Rutin", description: "Melakukan 5 screening bulan ini", icon: Brain, color: "bg-purple-600" },
-    { title: "Mood Stabil", description: "Mood rata-rata baik minggu ini", icon: Heart, color: "bg-green-600" },
-    { title: "Konsisten Chat", description: "Aktif chat dengan AI Terapis", icon: Award, color: "bg-orange-600" }
+  const monthlyData = [
+    { month: "Jul", screenings: 2, journals: 8, mood: 6.5 },
+    { month: "Aug", screenings: 3, journals: 12, mood: 6.8 },
+    { month: "Sep", screenings: 4, journals: 15, mood: 7.0 },
+    { month: "Oct", screenings: 3, journals: 10, mood: 6.9 },
+    { month: "Nov", screenings: 2, journals: 8, mood: 7.1 },
+    { month: "Dec", screenings: 3, journals: 8, mood: 7.2 }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
-      <div className="max-w-6xl mx-auto">
-        {/* Back Button */}
-        <div className="flex items-center mb-6">
-          <Link href="/dashboard">
-            <Button variant="ghost" className="mr-4">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Dashboard
-            </Button>
-          </Link>
-        </div>
-
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Progress Tracking</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Pantau perkembangan kesehatan mental Anda melalui berbagai metrik dan visualisasi data.
-          </p>
-        </div>
-
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Mood Rata-rata</p>
-                  <p className="text-2xl font-bold text-green-600">7.4/10</p>
-                  <p className="text-xs text-green-600">↑ 0.8 dari minggu lalu</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center">
+              <Link href="/dashboard">
+                <Button variant="ghost" size="sm" className="mr-4">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Dashboard
+                </Button>
+              </Link>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-white" />
                 </div>
-                <Heart className="w-8 h-8 text-green-600" />
+                <div>
+                  <h1 className="text-xl font-semibold text-gray-900">Progress Tracking</h1>
+                  <p className="text-sm text-gray-600">Monitor your mental health journey</p>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Streak Jurnal</p>
-                  <p className="text-2xl font-bold text-blue-600">7 hari</p>
-                  <p className="text-xs text-blue-600">Target: 30 hari</p>
-                </div>
-                <BookOpen className="w-8 h-8 text-blue-600" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Screening Bulan Ini</p>
-                  <p className="text-2xl font-bold text-purple-600">5</p>
-                  <p className="text-xs text-purple-600">Terakhir: 2 hari lalu</p>
-                </div>
-                <Brain className="w-8 h-8 text-purple-600" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-600">Skor Kemajuan</p>
-                  <p className="text-2xl font-bold text-orange-600">78%</p>
-                  <p className="text-xs text-orange-600">↑ 12% bulan ini</p>
-                </div>
-                <Target className="w-8 h-8 text-orange-600" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Weekly Progress Chart */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <BarChart3 className="w-5 h-5 mr-2 text-blue-600" />
-                  Progress Mingguan
-                </CardTitle>
-                <CardDescription>
-                  Aktivitas dan mood Anda dalam 7 hari terakhir
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {/* Mood Chart */}
-                  <div>
-                    <h4 className="font-medium mb-2">Mood Harian (1-10)</h4>
-                    <div className="flex items-end space-x-2 h-32">
-                      {weeklyProgress.map((day, index) => (
-                        <div key={index} className="flex-1 flex flex-col items-center">
-                          <div 
-                            className="w-full bg-blue-600 rounded-t"
-                            style={{ height: `${(day.mood / 10) * 100}%` }}
-                          ></div>
-                          <span className="text-xs text-gray-600 mt-1">{day.day}</span>
-                          <span className="text-xs font-medium">{day.mood}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Activity Summary */}
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">7/7</div>
-                      <div className="text-sm text-gray-600">Jurnal Harian</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-600">2/7</div>
-                      <div className="text-sm text-gray-600">Screening</div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Screening History */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <LineChart className="w-5 h-5 mr-2 text-purple-600" />
-                  Riwayat Screening
-                </CardTitle>
-                <CardDescription>
-                  Perkembangan skor screening dari waktu ke waktu
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {screeningHistory.map((screening, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                          <Brain className="w-5 h-5 text-purple-600" />
-                        </div>
-                        <div>
-                          <div className="font-medium">{screening.type}</div>
-                          <div className="text-sm text-gray-600">{screening.date}</div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-lg font-bold">{screening.score}</div>
-                        <div className={`text-sm ${screening.color}`}>{screening.severity}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Mood Trends */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <PieChart className="w-5 h-5 mr-2 text-green-600" />
-                  Analisis Mood
-                </CardTitle>
-                <CardDescription>
-                  Distribusi mood Anda bulan ini
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl">😊</span>
-                    </div>
-                    <div className="text-lg font-bold text-green-600">65%</div>
-                    <div className="text-sm text-gray-600">Mood Baik</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl">😐</span>
-                    </div>
-                    <div className="text-lg font-bold text-yellow-600">25%</div>
-                    <div className="text-sm text-gray-600">Mood Netral</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                      <span className="text-2xl">😔</span>
-                    </div>
-                    <div className="text-lg font-bold text-red-600">10%</div>
-                    <div className="text-sm text-gray-600">Mood Buruk</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Achievements */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Award className="w-5 h-5 mr-2 text-yellow-600" />
-                  Pencapaian
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {achievements.map((achievement, index) => {
-                  const IconComponent = achievement.icon;
-                  return (
-                    <div key={index} className="flex items-center space-x-3 p-3 border rounded-lg">
-                      <div className={`w-10 h-10 ${achievement.color} rounded-full flex items-center justify-center`}>
-                        <IconComponent className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-medium text-sm">{achievement.title}</div>
-                        <div className="text-xs text-gray-600">{achievement.description}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </CardContent>
-            </Card>
-
-            {/* Goals */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Target className="w-5 h-5 mr-2 text-blue-600" />
-                  Target Bulan Ini
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Jurnal Harian</span>
-                    <span>23/30</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-blue-600 h-2 rounded-full" style={{width: '77%'}}></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Screening Mingguan</span>
-                    <span>2/4</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-purple-600 h-2 rounded-full" style={{width: '50%'}}></div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Mood Rata-rata</span>
-                    <span>7.4/8.0</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-green-600 h-2 rounded-full" style={{width: '93%'}}></div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Insights */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <TrendingUp className="w-5 h-5 mr-2 text-green-600" />
-                  Insights
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-sm text-gray-600">
-                <p>• Mood Anda cenderung lebih baik di akhir pekan</p>
-                <p>• Konsistensi menulis jurnal meningkatkan mood harian</p>
-                <p>• Skor screening menunjukkan tren perbaikan</p>
-                <p>• Aktivitas chat dengan AI membantu stabilitas emosi</p>
-              </CardContent>
-            </Card>
+            </div>
+            <Badge variant="secondary" className="bg-green-100 text-green-800">
+              {progressData.streakDays} day streak
+            </Badge>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Screenings</CardTitle>
+              <Brain className="h-4 w-4 text-blue-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{progressData.screenings.total}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">{progressData.screenings.trend}</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Journal Entries</CardTitle>
+              <BookOpen className="h-4 w-4 text-purple-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{progressData.journalEntries.total}</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">{progressData.journalEntries.trend}</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Average Mood</CardTitle>
+              <Heart className="h-4 w-4 text-red-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{progressData.moodScore.current}/10</div>
+              <p className="text-xs text-muted-foreground">
+                <span className="text-green-600">{progressData.moodScore.trend}</span> from last month
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
+              <Award className="h-4 w-4 text-yellow-600" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{progressData.streakDays}</div>
+              <p className="text-xs text-muted-foreground">consecutive days</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Progress Chart */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <BarChart3 className="w-5 h-5 mr-2 text-blue-600" />
+                Monthly Progress
+              </CardTitle>
+              <CardDescription>Your activity over the past 6 months</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {monthlyData.map((data, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 text-sm font-medium">{data.month}</div>
+                      <div className="flex space-x-2">
+                        <Badge variant="outline" className="text-xs">
+                          {data.screenings} screenings
+                        </Badge>
+                        <Badge variant="outline" className="text-xs">
+                          {data.journals} journals
+                        </Badge>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-600">Mood:</span>
+                      <span className="font-medium">{data.mood}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Recent Activity */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Calendar className="w-5 h-5 mr-2 text-purple-600" />
+                Recent Activity
+              </CardTitle>
+              <CardDescription>Your latest screenings and journal entries</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {recentActivities.map((activity, index) => (
+                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        activity.type === 'screening' ? 'bg-blue-100' : 'bg-purple-100'
+                      }`}>
+                        {activity.type === 'screening' ? 
+                          <Brain className="w-4 h-4 text-blue-600" /> : 
+                          <BookOpen className="w-4 h-4 text-purple-600" />
+                        }
+                      </div>
+                      <div>
+                        <p className="font-medium text-sm">{activity.name}</p>
+                        <p className="text-xs text-gray-600">{activity.date}</p>
+                      </div>
+                    </div>
+                    <div>
+                      {activity.score && (
+                        <Badge variant="secondary" className="text-xs">
+                          {activity.score}
+                        </Badge>
+                      )}
+                      {activity.mood && (
+                        <Badge variant="secondary" className="text-xs">
+                          {activity.mood}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Goals and Insights */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Target className="w-5 h-5 mr-2 text-green-600" />
+                Goals & Milestones
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-green-600 rounded-full"></div>
+                  <span className="text-sm">Complete weekly screening</span>
+                </div>
+                <Badge className="bg-green-600">Achieved</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                  <span className="text-sm">Journal 5 times this week</span>
+                </div>
+                <Badge variant="outline">3/5</Badge>
+              </div>
+              <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-2 h-2 bg-yellow-600 rounded-full"></div>
+                  <span className="text-sm">Maintain 30-day streak</span>
+                </div>
+                <Badge variant="outline">14/30</Badge>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <LineChart className="w-5 h-5 mr-2 text-orange-600" />
+                Insights & Trends
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="p-3 bg-blue-50 rounded-lg">
+                <p className="text-sm font-medium text-blue-800">Mood Improvement</p>
+                <p className="text-xs text-blue-600 mt-1">
+                  Your average mood has improved by 5.9% this month. Keep up the great work!
+                </p>
+              </div>
+              <div className="p-3 bg-purple-50 rounded-lg">
+                <p className="text-sm font-medium text-purple-800">Consistent Journaling</p>
+                <p className="text-xs text-purple-600 mt-1">
+                  You've been more consistent with journaling. This correlates with better mood scores.
+                </p>
+              </div>
+              <div className="p-3 bg-green-50 rounded-lg">
+                <p className="text-sm font-medium text-green-800">Screening Results</p>
+                <p className="text-xs text-green-600 mt-1">
+                  Your recent screenings show positive trends. Consider discussing with a professional.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Quick Actions */}
+        <Card className="mt-8">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Continue your mental health journey</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Link href="/screening">
+                <Button className="w-full h-16 flex flex-col items-center justify-center space-y-2">
+                  <Brain className="w-6 h-6" />
+                  <span>Take Screening</span>
+                </Button>
+              </Link>
+              <Link href="/journal">
+                <Button variant="outline" className="w-full h-16 flex flex-col items-center justify-center space-y-2">
+                  <BookOpen className="w-6 h-6" />
+                  <span>Write Journal</span>
+                </Button>
+              </Link>
+              <Link href="/chat">
+                <Button variant="outline" className="w-full h-16 flex flex-col items-center justify-center space-y-2">
+                  <Heart className="w-6 h-6" />
+                  <span>Get Support</span>
+                </Button>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
