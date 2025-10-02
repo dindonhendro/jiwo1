@@ -1,15 +1,31 @@
+'use client';
+
 import Link from "next/link";
-import { createClient } from "../../supabase/server";
 import { Button } from "./ui/button";
 import { User, UserCircle, Heart } from "lucide-react";
 import UserProfile from "./user-profile";
+import { useEffect, useState } from "react";
+import { createClient } from "../../supabase/client";
 
-export default async function Navbar() {
-  const supabase = createClient();
+export default function Navbar() {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const {
-    data: { user },
-  } = await (await supabase).auth.getUser();
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        setUser(user);
+      } catch (error) {
+        console.log("Auth error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getUser();
+  }, []);
 
   return (
     <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4">
@@ -23,7 +39,9 @@ export default async function Navbar() {
           Jiwo.AI
         </Link>
         <div className="flex gap-4 items-center">
-          {user ? (
+          {loading ? (
+            <div className="w-20 h-8 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+          ) : user ? (
             <>
               <Link
                 href="/dashboard"
