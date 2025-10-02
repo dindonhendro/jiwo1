@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Calendar } from "@/components/ui/calendar";
 import { Heart, Brain, Apple, Target, Flower2, Palette, ArrowLeft, Star, MapPin, DollarSign, FileText, Award, Clock, CalendarDays } from "lucide-react";
 import { createClient } from "../../../../supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const TREATMENT_METHODS = {
   "psychiatrist": { name: "Psikiater", icon: Brain, color: "bg-blue-600" },
@@ -39,7 +39,7 @@ const TIME_SLOTS = [
 ];
 
 export default function TreatmentBookingPage() {
-  const [step, setStep] = useState<'method' | 'professional' | 'booking' | 'payment'>('method');
+  const [step, setStep] = useState<'method' | 'professional' | 'booking' | 'payment'>('professional');
   const [selectedMethod, setSelectedMethod] = useState<string>("");
   const [selectedProfessional, setSelectedProfessional] = useState<Professional | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -49,6 +49,17 @@ export default function TreatmentBookingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const supabase = createClient();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const method = searchParams.get('method');
+    if (method && TREATMENT_METHODS[method as keyof typeof TREATMENT_METHODS]) {
+      setSelectedMethod(method);
+      loadProfessionals(method);
+    } else {
+      setStep('method');
+    }
+  }, [searchParams]);
 
   const loadProfessionals = async (treatmentType: string) => {
     setIsLoading(true);
@@ -90,6 +101,20 @@ export default function TreatmentBookingPage() {
             available_online: true,
             available_offline: false,
             languages: ['Indonesian']
+          },
+          {
+            id: '3',
+            name: 'Dr. Maya Sari',
+            specialty: 'Nutritional Therapist',
+            treatment_type: treatmentType,
+            avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=maya',
+            bio: 'Certified nutritional therapist focusing on mental health through dietary interventions.',
+            experience_years: 6,
+            rating: 4.7,
+            price_per_session: 400000,
+            available_online: true,
+            available_offline: true,
+            languages: ['Indonesian', 'English']
           }
         ]);
       } else {

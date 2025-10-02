@@ -426,18 +426,19 @@ export default function TreatmentPage() {
                     </p>
                   </div>
 
-                  {/* Book Now Button */}
+                  {/* Book Now Button - Navigate to professional selection */}
                   <div className="pt-2">
-                    <Link href={`/treatment/book?method=${method.id}`}>
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="w-full"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Book Session
-                      </Button>
-                    </Link>
+                    <Button 
+                      variant="default" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/treatment/book?method=${method.id}`);
+                      }}
+                    >
+                      Book Professional
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
