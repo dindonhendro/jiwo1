@@ -30,6 +30,7 @@ import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
   const supabase = createClient();
   const router = useRouter();
 
@@ -40,6 +41,17 @@ export default function Dashboard() {
         router.push("/sign-in");
       } else {
         setUser(user);
+        
+        // Get user's name from the users table
+        const { data: userData, error } = await supabase
+          .from('users')
+          .select('name')
+          .eq('id', user.id)
+          .single();
+        
+        if (userData && !error) {
+          setUserName(userData.name);
+        }
       }
     };
     getUser();
@@ -75,7 +87,9 @@ export default function Dashboard() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Selamat datang kembali!</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {userName ? `Halo ${userName}, Selamat datang kembali!` : 'Selamat datang kembali!'}
+            </h1>
             <p className="text-gray-600">Berikut ringkasan perjalanan kesehatan mental Anda</p>
           </div>
 

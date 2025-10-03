@@ -55,6 +55,41 @@ export default async function Signup(props: {
                   />
                 </div>
 
+                <div className="space-y-2">
+                  <Label htmlFor="nickname" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
+                    Nama Panggilan
+                  </Label>
+                  <Input
+                    id="nickname"
+                    name="nickname"
+                    type="text"
+                    placeholder="John"
+                    required
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="education" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
+                    Pendidikan Terakhir
+                  </Label>
+                  <select
+                    id="education"
+                    name="education"
+                    required
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border border-[#756657]/20 text-[#161413] dark:text-[#eeedec] rounded-md px-3 py-2 focus:ring-[#756657] focus:border-[#756657]"
+                  >
+                    <option value="">Pilih Pendidikan</option>
+                    <option value="SD">SD/Sederajat</option>
+                    <option value="SMP">SMP/Sederajat</option>
+                    <option value="SMA">SMA/SMK/Sederajat</option>
+                    <option value="D3">Diploma 3</option>
+                    <option value="S1">Sarjana (S1)</option>
+                    <option value="S2">Magister (S2)</option>
+                    <option value="S3">Doktor (S3)</option>
+                  </select>
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="gender" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">

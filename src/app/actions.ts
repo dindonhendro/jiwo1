@@ -9,6 +9,8 @@ export const signUpAction = async (formData: FormData) => {
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const fullName = formData.get("full_name")?.toString() || '';
+  const nickname = formData.get("nickname")?.toString() || '';
+  const education = formData.get("education")?.toString() || '';
   const gender = formData.get("gender")?.toString() || '';
   const age = formData.get("age")?.toString() || '';
   const supabase = await createClient();
@@ -22,11 +24,11 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
-  if (!gender || !age) {
+  if (!gender || !age || !nickname || !education) {
     return encodedRedirect(
       "error",
       "/sign-up",
-      "Gender and age are required for mental health analysis",
+      "Semua field wajib diisi untuk analisis kesehatan mental yang akurat",
     );
   }
 
@@ -37,9 +39,11 @@ export const signUpAction = async (formData: FormData) => {
       emailRedirectTo: `${origin}/auth/callback`,
       data: {
         full_name: fullName,
+        nickname: nickname,
         email: email,
         gender: gender,
-        age: parseInt(age)
+        age: parseInt(age),
+        education: education
       }
     },
   });
@@ -57,11 +61,12 @@ export const signUpAction = async (formData: FormData) => {
         .from('users')
         .insert({
           id: user.id,
-          name: fullName,
+          name: nickname, // Use nickname as the display name
           full_name: fullName,
           email: email,
           gender: gender,
           age: parseInt(age),
+          education: education,
           user_id: user.id,
           token_identifier: user.id,
           created_at: new Date().toISOString()

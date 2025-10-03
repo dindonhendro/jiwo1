@@ -123,7 +123,7 @@ export default function Chatbot() {
         <div className="fixed top-6 right-6 z-50">
           <button
             onClick={() => setIsOpen(true)}
-            className="w-14 h-14 rounded-full bg-[#756657] hover:bg-[#756657]/90 shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 group"
+            className="w-14 h-14 rounded-full bg-green-500 hover:bg-green-600 shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 group"
           >
             <MessageCircle className="w-6 h-6 text-white" />
           </button>
