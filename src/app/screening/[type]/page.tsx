@@ -161,25 +161,49 @@ export default function ScreeningTypePage() {
       // Calculate total score
       const totalScore = Object.values(answers).reduce((sum, answer) => sum + parseInt(answer), 0);
       
-      // Save to database
+      // Map screening types to database format
+      const typeMapping = {
+        'phq9': 'PHQ-9',
+        'gad7': 'GAD-7',
+        'gds15': 'GDS-15',
+        'epds': 'EPDS'
+      };
+      
+      // Determine severity based on score and screening type (Indonesian labels)
+      let severity = 'Minimal';
+      if (screeningType === 'phq9') {
+        if (totalScore >= 20) severity = 'Berat';
+        else if (totalScore >= 15) severity = 'Sedang';
+        else if (totalScore >= 10) severity = 'Sedang';
+        else if (totalScore >= 5) severity = 'Ringan';
+        else severity = 'Minimal';
+      } else if (screeningType === 'gad7') {
+        if (totalScore >= 15) severity = 'Berat';
+        else if (totalScore >= 10) severity = 'Sedang';
+        else if (totalScore >= 5) severity = 'Ringan';
+        else severity = 'Minimal';
+      }
+      
+      // Save to database with correct format
       const { error } = await supabase
         .from('screenings')
         .insert({
           user_id: user.id,
-          screening_type: screeningType,
-          responses: answers,
-          total_score: totalScore,
-          completed_at: new Date().toISOString()
+          type: typeMapping[screeningType as keyof typeof typeMapping] || screeningType.toUpperCase(),
+          answers: answers,
+          score: totalScore,
+          severity: severity,
+          condition: screeningType === 'phq9' ? 'Depresi' : screeningType === 'gad7' ? 'Kecemasan' : 'Lainnya'
         });
 
       if (error) {
         console.error('Error saving screening:', error);
-        alert('Terjadi kesalahan saat menyimpan hasil screening');
+        alert('Terjadi kesalahan saat menyimpan hasil screening: ' + error.message);
         return;
       }
 
-      // Redirect to results or dashboard
-      router.push('/dashboard?screening=completed');
+      // Redirect to results page instead of dashboard
+      router.push('/screening/results');
       
     } catch (error) {
       console.error('Error submitting screening:', error);

@@ -16,7 +16,8 @@ import {
   Clock,
   Users,
   Star,
-  ArrowRight
+  ArrowRight,
+  ArrowLeft
 } from "lucide-react";
 import { createClient } from "../../../supabase/client";
 import { useRouter } from "next/navigation";
@@ -289,6 +290,16 @@ export default function TreatmentPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 p-6">
       <div className="max-w-7xl mx-auto">
+        {/* Header with Back to Dashboard Button */}
+        <div className="flex items-center justify-between mb-8">
+          <Link href="/dashboard">
+            <Button variant="ghost" className="flex items-center">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Dashboard
+            </Button>
+          </Link>
+        </div>
+
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
             <Heart className="w-8 h-8 text-white" />
