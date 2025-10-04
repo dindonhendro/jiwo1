@@ -26,7 +26,7 @@ export default async function Signup(props: {
       <div className="flex min-h-screen flex-col items-center justify-center bg-[#f7f7f7] dark:bg-[#1b1918] px-4 py-8">
         <div className="w-full max-w-md rounded-lg border border-[#756657]/20 bg-white dark:bg-[#302d2a] p-6 shadow-sm">
           <UrlProvider>
-            <form className="flex flex-col space-y-6">
+            <form className="flex flex-col space-y-6" action={signUpAction}>
               <div className="space-y-2 text-center">
                 <h1 className="text-3xl font-semibold tracking-tight text-[#161413] dark:text-[#eeedec]">Daftar</h1>
                 <p className="text-sm text-[#7a736c] dark:text-[#a19991]">
@@ -156,7 +156,6 @@ export default async function Signup(props: {
               </div>
 
               <SubmitButton
-                formAction={signUpAction}
                 pendingText="Sedang mendaftar..."
                 className="w-full bg-[#756657] hover:bg-[#756657]/90 text-white"
               >

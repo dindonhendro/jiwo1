@@ -164,7 +164,7 @@ export default function JournalPage() {
     }, {});
 
     return Object.entries(wordCount)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([,a], [,b]) => (b as number) - (a as number))
       .slice(0, 10)
       .map(([word, count]) => ({ word, count }));
   };
@@ -354,7 +354,7 @@ export default function JournalPage() {
                       {Object.entries(analysisResult.moodDistribution).map(([mood, count]) => (
                         <div key={mood} className="text-center p-3 bg-gray-50 rounded-lg">
                           {getMoodIcon(mood)}
-                          <div className="text-lg font-bold mt-1">{count}</div>
+                          <div className="text-lg font-bold mt-1">{count as number}</div>
                           <div className="text-xs text-gray-600 capitalize">{mood === 'good' ? 'Baik' : mood === 'neutral' ? 'Biasa' : 'Buruk'}</div>
                         </div>
                       ))}

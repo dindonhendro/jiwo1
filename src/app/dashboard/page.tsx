@@ -29,8 +29,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
-  const [user, setUser] = useState(null);
-  const [userName, setUserName] = useState("");
+  const [user, setUser] = useState<any>(null);
+  const [userName, setUserName] = useState<string>("");
   const supabase = createClient();
   const router = useRouter();
 

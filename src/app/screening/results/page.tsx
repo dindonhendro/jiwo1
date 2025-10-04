@@ -28,6 +28,7 @@ import {
   Shield
 } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from 'react';
 
 interface ScreeningResult {
   id: string;
@@ -165,7 +166,7 @@ const treatmentRecommendations = {
   }
 };
 
-export default function ScreeningResultsPage() {
+function ScreeningResultsContent() {
   const [result, setResult] = useState<ScreeningResult | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -595,4 +596,17 @@ export default function ScreeningResultsPage() {
       </div>
     </div>
   );
+}
+
+export default function ScreeningResults() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#756657] mx-auto mb-4"></div>
+        <p className="text-gray-600">Loading results...</p>
+      </div>
+    </div>}>
+      <ScreeningResultsContent />
+    </Suspense>
+  )
 }
