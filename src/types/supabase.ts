@@ -88,28 +88,64 @@ export type Database = {
           },
         ]
       }
+      cbt_content: {
+        Row: {
+          created_at: string | null
+          examples: string | null
+          id: number
+          prompt_text: string
+          step: number
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          examples?: string | null
+          id?: number
+          prompt_text: string
+          step: number
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          examples?: string | null
+          id?: number
+          prompt_text?: string
+          step?: number
+          title?: string
+        }
+        Relationships: []
+      }
       chats: {
         Row: {
           created_at: string | null
           id: string
+          image_url: string | null
           message: string
+          message_type: string | null
           professional_id: string | null
+          read_at: string | null
           sender: string
           user_id: string | null
         }
         Insert: {
           created_at?: string | null
           id?: string
+          image_url?: string | null
           message: string
+          message_type?: string | null
           professional_id?: string | null
+          read_at?: string | null
           sender: string
           user_id?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
+          image_url?: string | null
           message?: string
+          message_type?: string | null
           professional_id?: string | null
+          read_at?: string | null
           sender?: string
           user_id?: string | null
         }
@@ -248,6 +284,108 @@ export type Database = {
           score?: number
           severity?: string
           type?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      sessions: {
+        Row: {
+          bot_reply: string | null
+          created_at: string | null
+          ended_at: string | null
+          id: string
+          metadata: Json | null
+          method: string | null
+          next_step: number | null
+          notes: string | null
+          reflection: Json | null
+          session_status: string | null
+          started_at: string | null
+          step: number
+          user_id: string
+          user_message: string | null
+        }
+        Insert: {
+          bot_reply?: string | null
+          created_at?: string | null
+          ended_at?: string | null
+          id?: string
+          metadata?: Json | null
+          method?: string | null
+          next_step?: number | null
+          notes?: string | null
+          reflection?: Json | null
+          session_status?: string | null
+          started_at?: string | null
+          step?: number
+          user_id: string
+          user_message?: string | null
+        }
+        Update: {
+          bot_reply?: string | null
+          created_at?: string | null
+          ended_at?: string | null
+          id?: string
+          metadata?: Json | null
+          method?: string | null
+          next_step?: number | null
+          notes?: string | null
+          reflection?: Json | null
+          session_status?: string | null
+          started_at?: string | null
+          step?: number
+          user_id?: string
+          user_message?: string | null
+        }
+        Relationships: []
+      }
+      sfb_content: {
+        Row: {
+          created_at: string | null
+          examples: string | null
+          id: string
+          prompt_text: string
+          step: number
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          examples?: string | null
+          id?: string
+          prompt_text: string
+          step: number
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          examples?: string | null
+          id?: string
+          prompt_text?: string
+          step?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      typing_indicators: {
+        Row: {
+          id: string
+          is_typing: boolean | null
+          professional_id: string | null
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string
+          is_typing?: boolean | null
+          professional_id?: string | null
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string
+          is_typing?: boolean | null
+          professional_id?: string | null
           updated_at?: string | null
           user_id?: string | null
         }

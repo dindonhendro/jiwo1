@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import { Button } from './ui/button'
-import { UserCircle, Home, Brain, Heart, BookOpen, TrendingUp, MessageCircle } from 'lucide-react'
+import { UserCircle, Home, Brain, Heart, BookOpen, TrendingUp, MessageCircle, MessageSquare } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export default function DashboardNavbar() {
@@ -54,6 +54,10 @@ export default function DashboardNavbar() {
             <Link href="/chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <MessageCircle className="w-4 h-4" />
               Chat
+            </Link>
+            <Link href="/cbt-chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
+              <MessageSquare className="w-4 h-4" />
+              CBT Chat
             </Link>
             <Link href="/treatment" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Heart className="w-4 h-4" />

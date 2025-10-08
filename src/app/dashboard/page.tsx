@@ -22,7 +22,8 @@ import {
   Flower2,
   Palette,
   Video,
-  MapPin
+  MapPin,
+  MessageSquare
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -175,7 +176,13 @@ export default function Dashboard() {
                       </Button>
                     </Link>
                   </div>
-                  <div className="mt-4">
+                  <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <Link href="/cbt-chat">
+                      <Button className="h-16 flex-col space-y-2 bg-blue-600 hover:bg-blue-700 w-full">
+                        <MessageSquare className="w-6 h-6" />
+                        <span className="text-sm">CBT Chat</span>
+                      </Button>
+                    </Link>
                     <Link href="/progress">
                       <Button className="h-16 flex-col space-y-2 bg-orange-600 hover:bg-orange-700 w-full">
                         <TrendingUp className="w-6 h-6" />
