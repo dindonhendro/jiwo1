@@ -2,29 +2,14 @@
 
 import Link from 'next/link'
 import { createClient } from '../../supabase/client'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './ui/dropdown-menu'
+import UserProfile from './user-profile'
 import { Button } from './ui/button'
-import { UserCircle, Home, Brain, Heart, BookOpen, TrendingUp, MessageCircle, MessageSquare, Sparkles } from 'lucide-react'
+import { Home, Brain, Heart, BookOpen, TrendingUp, MessageCircle, Sparkles } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 export default function DashboardNavbar() {
   const supabase = createClient()
   const router = useRouter()
-
-  const handleSignOut = async () => {
-    try {
-      await supabase.auth.signOut()
-      router.push('/sign-in')
-      router.refresh()
-    } catch (error) {
-      console.error('Error signing out:', error)
-    }
-  }
 
   return (
     <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4 relative z-50">
@@ -35,10 +20,6 @@ export default function DashboardNavbar() {
             Jiwo.AI
           </Link>
           <div className="hidden md:flex items-center gap-4 ml-8">
-            <Link href="/dashboard" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
-              <Home className="w-4 h-4" />
-              Dashboard
-            </Link>
             <Link href="/screening" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Brain className="w-4 h-4" />
               Screening
@@ -62,25 +43,15 @@ export default function DashboardNavbar() {
           </div>
         </div>
         <div className="flex gap-4 items-center">
+          <Link href="/dashboard" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
+            <Home className="w-4 h-4" />
+            <span className="hidden sm:inline">Dashboard</span>
+          </Link>
           <Link href="/chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
             <MessageCircle className="w-4 h-4" />
             <span className="hidden sm:inline">Chat</span>
           </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-[#756657] hover:bg-[#756657]/10">
-                <UserCircle className="h-6 w-6" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white dark:bg-[#302d2a] border-[#756657]/20">
-              <DropdownMenuItem 
-                onClick={handleSignOut}
-                className="text-[#161413] dark:text-[#eeedec] hover:bg-[#756657]/10"
-              >
-                Sign out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserProfile />
         </div>
       </div>
     </nav>

@@ -23,7 +23,8 @@ import {
   Palette,
   Video,
   MapPin,
-  MessageSquare
+  MessageSquare,
+  Sparkles
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -166,7 +167,7 @@ export default function Dashboard() {
                     <Link href="/journal">
                       <Button className="h-20 flex-col space-y-2 bg-purple-600 hover:bg-purple-700 w-full">
                         <BookOpen className="w-6 h-6" />
-                        <span className="text-sm">Tulis Jurnal</span>
+                        <span className="text-sm">Isi Diary Harian</span>
                       </Button>
                     </Link>
                     <Link href="/chat">
@@ -177,10 +178,10 @@ export default function Dashboard() {
                     </Link>
                   </div>
                   <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Link href="/cbt-chat">
+                    <Link href="/sfbt-chat">
                       <Button className="h-16 flex-col space-y-2 bg-blue-600 hover:bg-blue-700 w-full">
-                        <MessageSquare className="w-6 h-6" />
-                        <span className="text-sm">CBT Chat</span>
+                        <Sparkles className="w-6 h-6" />
+                        <span className="text-sm">SFBT Chat</span>
                       </Button>
                     </Link>
                     <Link href="/progress">
