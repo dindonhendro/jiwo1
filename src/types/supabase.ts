@@ -149,7 +149,15 @@ export type Database = {
           sender?: string
           user_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "chats_professional_id_fkey"
+            columns: ["professional_id"]
+            isOneToOne: false
+            referencedRelation: "professionals"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       journals: {
         Row: {
@@ -196,13 +204,16 @@ export type Database = {
           cv_data: Json | null
           education: string[] | null
           experience_years: number | null
+          full_name: string | null
           id: string
           is_active: boolean | null
+          is_available: boolean | null
           languages: string[] | null
           name: string
           price_per_session: number | null
           rating: number | null
           skills: string[] | null
+          specialization: string | null
           specialty: string
           treatment_type: string
           work_experience: Json[] | null
@@ -218,13 +229,16 @@ export type Database = {
           cv_data?: Json | null
           education?: string[] | null
           experience_years?: number | null
+          full_name?: string | null
           id?: string
           is_active?: boolean | null
+          is_available?: boolean | null
           languages?: string[] | null
           name: string
           price_per_session?: number | null
           rating?: number | null
           skills?: string[] | null
+          specialization?: string | null
           specialty: string
           treatment_type: string
           work_experience?: Json[] | null
@@ -240,13 +254,16 @@ export type Database = {
           cv_data?: Json | null
           education?: string[] | null
           experience_years?: number | null
+          full_name?: string | null
           id?: string
           is_active?: boolean | null
+          is_available?: boolean | null
           languages?: string[] | null
           name?: string
           price_per_session?: number | null
           rating?: number | null
           skills?: string[] | null
+          specialization?: string | null
           specialty?: string
           treatment_type?: string
           work_experience?: Json[] | null
@@ -399,10 +416,12 @@ export type Database = {
           education: string | null
           email: string | null
           full_name: string | null
+          gender: string | null
           id: string
           image: string | null
           name: string | null
           nickname: string | null
+          role: string | null
           token_identifier: string
           updated_at: string | null
           user_id: string | null
@@ -414,10 +433,12 @@ export type Database = {
           education?: string | null
           email?: string | null
           full_name?: string | null
+          gender?: string | null
           id: string
           image?: string | null
           name?: string | null
           nickname?: string | null
+          role?: string | null
           token_identifier: string
           updated_at?: string | null
           user_id?: string | null
@@ -429,10 +450,12 @@ export type Database = {
           education?: string | null
           email?: string | null
           full_name?: string | null
+          gender?: string | null
           id?: string
           image?: string | null
           name?: string | null
           nickname?: string | null
+          role?: string | null
           token_identifier?: string
           updated_at?: string | null
           user_id?: string | null

@@ -13,6 +13,7 @@ export const signUpAction = async (formData: FormData) => {
   const education = formData.get("education")?.toString() || '';
   const gender = formData.get("gender")?.toString() || '';
   const age = formData.get("age")?.toString() || '';
+  const role = formData.get("role")?.toString() || 'user';
   const supabase = await createClient();
   const origin = headers().get("origin");
 
@@ -43,7 +44,8 @@ export const signUpAction = async (formData: FormData) => {
         email: email,
         gender: gender,
         age: parseInt(age),
-        education: education
+        education: education,
+        role: role
       }
     },
   });
@@ -67,6 +69,7 @@ export const signUpAction = async (formData: FormData) => {
           gender: gender,
           age: parseInt(age),
           education: education,
+          role: role,
           user_id: user.id,
           token_identifier: user.id,
           created_at: new Date().toISOString()
@@ -74,6 +77,37 @@ export const signUpAction = async (formData: FormData) => {
 
       if (updateError) {
         console.error('Error updating user profile:', updateError);
+      } else {
+        console.log('User profile created successfully with role:', role);
+      }
+
+      // If role is professional, add to professionals table
+      if (role !== 'user') {
+        const specializationMap: Record<string, string> = {
+          'psychologist': 'Psikolog',
+          'psychiatrist': 'Psikiater',
+          'nutritionist': 'Ahli Gizi',
+          'life_coach': 'Life Coach'
+        };
+
+        const { error: profError } = await supabase
+          .from('professionals')
+          .insert({
+            id: user.id,
+            name: nickname,
+            full_name: nickname,
+            specialty: specializationMap[role] || role,
+            specialization: specializationMap[role] || role,
+            treatment_type: role,
+            is_available: true,
+            created_at: new Date().toISOString()
+          });
+
+        if (profError) {
+          console.error('Error creating professional profile:', profError);
+        } else {
+          console.log('Professional profile created successfully');
+        }
       }
     } catch (err) {
       console.error('Error in user profile creation:', err);

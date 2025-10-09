@@ -42,6 +42,24 @@ export default async function Signup(props: {
 
               <div className="space-y-4">
                 <div className="space-y-2">
+                  <Label htmlFor="role" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
+                    Daftar Sebagai
+                  </Label>
+                  <select
+                    id="role"
+                    name="role"
+                    required
+                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border border-[#756657]/20 text-[#161413] dark:text-[#eeedec] rounded-md px-3 py-2 focus:ring-[#756657] focus:border-[#756657]"
+                  >
+                    <option value="user">Pengguna</option>
+                    <option value="psychologist">Psikolog</option>
+                    <option value="psychiatrist">Psikiater</option>
+                    <option value="nutritionist">Ahli Gizi</option>
+                    <option value="life_coach">Life Coach</option>
+                  </select>
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="nickname" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
                     Nama Panggilan
                   </Label>
