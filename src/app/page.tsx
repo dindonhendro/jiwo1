@@ -59,7 +59,7 @@ export default function Home() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Terapi AI Mandiri
+            Terapi Hybrid AI & Professional
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#756657] to-[#a08875]">
               Kapan Saja, Di Mana Saja

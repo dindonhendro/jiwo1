@@ -27,7 +27,7 @@ export default function DashboardNavbar() {
   }
 
   return (
-    <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4">
+    <nav className="w-full border-b border-[#756657]/20 bg-[#f7f7f7] dark:bg-[#1b1918] py-4 relative z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Link href="/" prefetch className="text-xl font-bold text-[#756657] flex items-center">
@@ -51,10 +51,6 @@ export default function DashboardNavbar() {
               <TrendingUp className="w-4 h-4" />
               Progress
             </Link>
-            <Link href="/chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
-              <MessageCircle className="w-4 h-4" />
-              Chat
-            </Link>
             <Link href="/sfbt-chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
               <Sparkles className="w-4 h-4" />
               SFBT Chat
@@ -66,6 +62,10 @@ export default function DashboardNavbar() {
           </div>
         </div>
         <div className="flex gap-4 items-center">
+          <Link href="/chat" className="flex items-center gap-2 text-[#7a736c] dark:text-[#a19991] hover:text-[#756657] transition-colors">
+            <MessageCircle className="w-4 h-4" />
+            <span className="hidden sm:inline">Chat</span>
+          </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="text-[#756657] hover:bg-[#756657]/10">
