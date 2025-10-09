@@ -61,8 +61,8 @@ export const signUpAction = async (formData: FormData) => {
         .from('users')
         .insert({
           id: user.id,
-          name: nickname, // Use nickname as the display name
-          full_name: fullName,
+          name: nickname,
+          nickname: nickname,
           email: email,
           gender: gender,
           age: parseInt(age),

@@ -42,20 +42,6 @@ export default async function Signup(props: {
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="full_name" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
-                    Nama Lengkap
-                  </Label>
-                  <Input
-                    id="full_name"
-                    name="full_name"
-                    type="text"
-                    placeholder="John Doe"
-                    required
-                    className="w-full bg-[#f7f7f7] dark:bg-[#1b1918] border-[#756657]/20 text-[#161413] dark:text-[#eeedec] placeholder-[#7a736c] dark:placeholder-[#a19991] focus:ring-[#756657] focus:border-[#756657]"
-                  />
-                </div>
-
-                <div className="space-y-2">
                   <Label htmlFor="nickname" className="text-sm font-medium text-[#161413] dark:text-[#eeedec]">
                     Nama Panggilan
                   </Label>

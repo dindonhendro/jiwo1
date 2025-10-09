@@ -393,6 +393,7 @@ export type Database = {
       }
       users: {
         Row: {
+          age: number | null
           avatar_url: string | null
           created_at: string
           education: string | null
@@ -401,11 +402,13 @@ export type Database = {
           id: string
           image: string | null
           name: string | null
+          nickname: string | null
           token_identifier: string
           updated_at: string | null
           user_id: string | null
         }
         Insert: {
+          age?: number | null
           avatar_url?: string | null
           created_at?: string
           education?: string | null
@@ -414,11 +417,13 @@ export type Database = {
           id: string
           image?: string | null
           name?: string | null
+          nickname?: string | null
           token_identifier: string
           updated_at?: string | null
           user_id?: string | null
         }
         Update: {
+          age?: number | null
           avatar_url?: string | null
           created_at?: string
           education?: string | null
@@ -427,6 +432,7 @@ export type Database = {
           id?: string
           image?: string | null
           name?: string | null
+          nickname?: string | null
           token_identifier?: string
           updated_at?: string | null
           user_id?: string | null
