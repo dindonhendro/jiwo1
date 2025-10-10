@@ -14,107 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      admin_users: {
-        Row: {
-          created_at: string | null
-          created_by: string | null
-          id: string
-          permissions: string[] | null
-          role: string
-          user_id: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          created_by?: string | null
-          id?: string
-          permissions?: string[] | null
-          role: string
-          user_id?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          created_by?: string | null
-          id?: string
-          permissions?: string[] | null
-          role?: string
-          user_id?: string | null
-        }
-        Relationships: []
-      }
-      appointments: {
-        Row: {
-          appointment_date: string
-          appointment_time: string
-          created_at: string | null
-          id: string
-          notes: string | null
-          professional_id: string | null
-          session_type: string
-          status: string | null
-          treatment_type: string
-          user_id: string | null
-        }
-        Insert: {
-          appointment_date: string
-          appointment_time: string
-          created_at?: string | null
-          id?: string
-          notes?: string | null
-          professional_id?: string | null
-          session_type: string
-          status?: string | null
-          treatment_type: string
-          user_id?: string | null
-        }
-        Update: {
-          appointment_date?: string
-          appointment_time?: string
-          created_at?: string | null
-          id?: string
-          notes?: string | null
-          professional_id?: string | null
-          session_type?: string
-          status?: string | null
-          treatment_type?: string
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "appointments_professional_id_fkey"
-            columns: ["professional_id"]
-            isOneToOne: false
-            referencedRelation: "professionals"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      cbt_content: {
-        Row: {
-          created_at: string | null
-          examples: string | null
-          id: number
-          prompt_text: string
-          step: number
-          title: string
-        }
-        Insert: {
-          created_at?: string | null
-          examples?: string | null
-          id?: number
-          prompt_text: string
-          step: number
-          title: string
-        }
-        Update: {
-          created_at?: string | null
-          examples?: string | null
-          id?: number
-          prompt_text?: string
-          step?: number
-          title?: string
-        }
-        Relationships: []
-      }
       chats: {
         Row: {
           created_at: string | null
@@ -122,10 +21,10 @@ export type Database = {
           image_url: string | null
           message: string
           message_type: string | null
-          professional_id: string | null
+          professional_id: string
           read_at: string | null
           sender: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           created_at?: string | null
@@ -133,10 +32,10 @@ export type Database = {
           image_url?: string | null
           message: string
           message_type?: string | null
-          professional_id?: string | null
+          professional_id: string
           read_at?: string | null
           sender: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           created_at?: string | null
@@ -144,10 +43,10 @@ export type Database = {
           image_url?: string | null
           message?: string
           message_type?: string | null
-          professional_id?: string | null
+          professional_id?: string
           read_at?: string | null
           sender?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: [
           {
@@ -194,79 +93,55 @@ export type Database = {
       }
       professionals: {
         Row: {
-          admin_notes: string | null
-          available_offline: boolean | null
-          available_online: boolean | null
-          avatar: string | null
           bio: string | null
-          certifications: string[] | null
           created_at: string | null
-          cv_data: Json | null
-          education: string[] | null
-          experience_years: number | null
-          full_name: string | null
+          email: string
+          full_name: string
           id: string
-          is_active: boolean | null
           is_available: boolean | null
+          is_verified: boolean | null
           languages: string[] | null
-          name: string
-          price_per_session: number | null
+          license_number: string | null
+          name: string | null
+          phone: string | null
           rating: number | null
-          skills: string[] | null
-          specialization: string | null
-          specialty: string
-          treatment_type: string
-          work_experience: Json[] | null
+          specialization: string
+          updated_at: string | null
+          years_of_experience: number | null
         }
         Insert: {
-          admin_notes?: string | null
-          available_offline?: boolean | null
-          available_online?: boolean | null
-          avatar?: string | null
           bio?: string | null
-          certifications?: string[] | null
           created_at?: string | null
-          cv_data?: Json | null
-          education?: string[] | null
-          experience_years?: number | null
-          full_name?: string | null
-          id?: string
-          is_active?: boolean | null
+          email: string
+          full_name: string
+          id: string
           is_available?: boolean | null
+          is_verified?: boolean | null
           languages?: string[] | null
-          name: string
-          price_per_session?: number | null
+          license_number?: string | null
+          name?: string | null
+          phone?: string | null
           rating?: number | null
-          skills?: string[] | null
-          specialization?: string | null
-          specialty: string
-          treatment_type: string
-          work_experience?: Json[] | null
+          specialization: string
+          updated_at?: string | null
+          years_of_experience?: number | null
         }
         Update: {
-          admin_notes?: string | null
-          available_offline?: boolean | null
-          available_online?: boolean | null
-          avatar?: string | null
           bio?: string | null
-          certifications?: string[] | null
           created_at?: string | null
-          cv_data?: Json | null
-          education?: string[] | null
-          experience_years?: number | null
-          full_name?: string | null
+          email?: string
+          full_name?: string
           id?: string
-          is_active?: boolean | null
           is_available?: boolean | null
+          is_verified?: boolean | null
           languages?: string[] | null
-          name?: string
-          price_per_session?: number | null
+          license_number?: string | null
+          name?: string | null
+          phone?: string | null
           rating?: number | null
-          skills?: string[] | null
-          specialization?: string | null
-          specialty?: string
-          treatment_type?: string
-          work_experience?: Json[] | null
+          specialization?: string
+          updated_at?: string | null
+          years_of_experience?: number | null
         }
         Relationships: []
       }
@@ -306,210 +181,48 @@ export type Database = {
         }
         Relationships: []
       }
-      sessions: {
-        Row: {
-          bot_reply: string | null
-          created_at: string | null
-          ended_at: string | null
-          id: string
-          metadata: Json | null
-          method: string | null
-          next_step: number | null
-          notes: string | null
-          reflection: Json | null
-          session_status: string | null
-          started_at: string | null
-          step: number
-          user_id: string
-          user_message: string | null
-        }
-        Insert: {
-          bot_reply?: string | null
-          created_at?: string | null
-          ended_at?: string | null
-          id?: string
-          metadata?: Json | null
-          method?: string | null
-          next_step?: number | null
-          notes?: string | null
-          reflection?: Json | null
-          session_status?: string | null
-          started_at?: string | null
-          step?: number
-          user_id: string
-          user_message?: string | null
-        }
-        Update: {
-          bot_reply?: string | null
-          created_at?: string | null
-          ended_at?: string | null
-          id?: string
-          metadata?: Json | null
-          method?: string | null
-          next_step?: number | null
-          notes?: string | null
-          reflection?: Json | null
-          session_status?: string | null
-          started_at?: string | null
-          step?: number
-          user_id?: string
-          user_message?: string | null
-        }
-        Relationships: []
-      }
-      sfb_content: {
-        Row: {
-          created_at: string | null
-          examples: string | null
-          id: string
-          prompt_text: string
-          step: number
-          title: string
-        }
-        Insert: {
-          created_at?: string | null
-          examples?: string | null
-          id?: string
-          prompt_text: string
-          step: number
-          title: string
-        }
-        Update: {
-          created_at?: string | null
-          examples?: string | null
-          id?: string
-          prompt_text?: string
-          step?: number
-          title?: string
-        }
-        Relationships: []
-      }
-      typing_indicators: {
-        Row: {
-          id: string
-          is_typing: boolean | null
-          professional_id: string | null
-          updated_at: string | null
-          user_id: string | null
-        }
-        Insert: {
-          id?: string
-          is_typing?: boolean | null
-          professional_id?: string | null
-          updated_at?: string | null
-          user_id?: string | null
-        }
-        Update: {
-          id?: string
-          is_typing?: boolean | null
-          professional_id?: string | null
-          updated_at?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
       users: {
         Row: {
           age: number | null
           avatar_url: string | null
-          created_at: string
+          created_at: string | null
           education: string | null
           email: string | null
-          full_name: string | null
           gender: string | null
           id: string
-          image: string | null
           name: string | null
           nickname: string | null
           role: string | null
-          token_identifier: string
+          token_identifier: string | null
           updated_at: string | null
-          user_id: string | null
         }
         Insert: {
           age?: number | null
           avatar_url?: string | null
-          created_at?: string
+          created_at?: string | null
           education?: string | null
           email?: string | null
-          full_name?: string | null
           gender?: string | null
           id: string
-          image?: string | null
           name?: string | null
           nickname?: string | null
           role?: string | null
-          token_identifier: string
+          token_identifier?: string | null
           updated_at?: string | null
-          user_id?: string | null
         }
         Update: {
           age?: number | null
           avatar_url?: string | null
-          created_at?: string
+          created_at?: string | null
           education?: string | null
           email?: string | null
-          full_name?: string | null
           gender?: string | null
           id?: string
-          image?: string | null
           name?: string | null
           nickname?: string | null
           role?: string | null
-          token_identifier?: string
+          token_identifier?: string | null
           updated_at?: string | null
-          user_id?: string | null
-        }
-        Relationships: []
-      }
-      yoga_vendors: {
-        Row: {
-          admin_notes: string | null
-          contact_email: string | null
-          contact_phone: string | null
-          created_at: string | null
-          description: string | null
-          id: string
-          images: string[] | null
-          is_active: boolean | null
-          location: string | null
-          name: string
-          pricing: Json | null
-          rating: number | null
-          services: string[] | null
-          website: string | null
-        }
-        Insert: {
-          admin_notes?: string | null
-          contact_email?: string | null
-          contact_phone?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          images?: string[] | null
-          is_active?: boolean | null
-          location?: string | null
-          name: string
-          pricing?: Json | null
-          rating?: number | null
-          services?: string[] | null
-          website?: string | null
-        }
-        Update: {
-          admin_notes?: string | null
-          contact_email?: string | null
-          contact_phone?: string | null
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          images?: string[] | null
-          is_active?: boolean | null
-          location?: string | null
-          name?: string
-          pricing?: Json | null
-          rating?: number | null
-          services?: string[] | null
-          website?: string | null
         }
         Relationships: []
       }
@@ -521,23 +234,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      application_status:
-        | "draft"
-        | "submitted"
-        | "under_review"
-        | "approved"
-        | "rejected"
-        | "cancelled"
-      user_role:
-        | "user"
-        | "wirausaha"
-        | "agent"
-        | "checker_agent"
-        | "validator"
-        | "bank_staff"
-        | "insurance"
-        | "collector"
-        | "admin"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -664,26 +361,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      application_status: [
-        "draft",
-        "submitted",
-        "under_review",
-        "approved",
-        "rejected",
-        "cancelled",
-      ],
-      user_role: [
-        "user",
-        "wirausaha",
-        "agent",
-        "checker_agent",
-        "validator",
-        "bank_staff",
-        "insurance",
-        "collector",
-        "admin",
-      ],
-    },
+    Enums: {},
   },
 } as const

@@ -2,6 +2,7 @@
 
 import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/lib/supabase/server";
+import { createClient as createServiceClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -33,20 +34,12 @@ export const signUpAction = async (formData: FormData) => {
     );
   }
 
+  // Create auth user without metadata to avoid trigger issues
   const { data: { user }, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      emailRedirectTo: `${origin}/welcome`,
-      data: {
-        full_name: fullName,
-        nickname: nickname,
-        email: email,
-        gender: gender,
-        age: parseInt(age),
-        education: education,
-        role: role
-      }
+      emailRedirectTo: `${origin}/welcome`
     },
   });
 
@@ -59,48 +52,43 @@ export const signUpAction = async (formData: FormData) => {
 
   if (user) {
     try {
-      const { error: updateError } = await supabase
+      // Use service role client for database operations
+      const serviceSupabase = createServiceClient(
+        process.env.SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_KEY!
+      );
+      
+      const { error: insertError } = await serviceSupabase
         .from('users')
         .insert({
           id: user.id,
-          name: nickname,
-          nickname: nickname,
+          name: fullName || nickname || 'User',
+          nickname: nickname || 'User',
           email: email,
-          gender: gender,
-          age: parseInt(age),
-          education: education,
-          role: role,
-          user_id: user.id,
-          token_identifier: user.id,
-          created_at: new Date().toISOString()
+          gender: gender || '',
+          age: parseInt(age) || 0,
+          education: education || '',
+          role: role || 'user',
+          token_identifier: email || ''
         });
 
-      if (updateError) {
-        console.error('Error updating user profile:', updateError);
+      if (insertError) {
+        console.error('Error creating user profile:', insertError);
       } else {
         console.log('User profile created successfully with role:', role);
       }
 
       // If role is professional, add to professionals table
       if (role !== 'user') {
-        const specializationMap: Record<string, string> = {
-          'psychologist': 'Psikolog',
-          'psychiatrist': 'Psikiater',
-          'nutritionist': 'Ahli Gizi',
-          'life_coach': 'Life Coach'
-        };
-
-        const { error: profError } = await supabase
+        const { error: profError } = await serviceSupabase
           .from('professionals')
           .insert({
             id: user.id,
-            name: nickname,
-            full_name: nickname,
-            specialty: specializationMap[role] || role,
-            specialization: specializationMap[role] || role,
-            treatment_type: role,
-            is_available: true,
-            created_at: new Date().toISOString()
+            name: nickname || 'Professional',
+            full_name: fullName || nickname || 'Professional',
+            email: email,
+            specialization: null,
+            is_available: true
           });
 
         if (profError) {
@@ -110,7 +98,7 @@ export const signUpAction = async (formData: FormData) => {
         }
       }
     } catch (err) {
-      console.error('Error in user profile creation:', err);
+      console.error('Error in profile creation:', err);
     }
   }
 
